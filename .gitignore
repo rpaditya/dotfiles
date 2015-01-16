@@ -19,6 +19,7 @@ nytprof.out
 id_dsa
 id_rsa
 identity
+*.gpg
 *.pem
 known_hosts
 history
