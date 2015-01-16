@@ -1,0 +1,91 @@
+Host=src.grot.org
+ Hostname=tiny.grot.org
+ Port=2022
+ User=aditya
+ AddressFamily=inet6
+
+Host=mini
+ Hostname=2001:470:c17d:1:216:cbff:fea4:dd64
+ AddressFamily=inet6
+ User=Media
+
+Host=tiny.go
+ Hostname=10.7.37.3
+ User=aditya
+ Port=2022
+ AddressFamily=inet
+
+Host=tiny.ipv6
+ Hostname=2001:470:c17d:1:207:e9ff:fea0:12b2
+ User=aditya
+ Port=2022
+ AddressFamily=inet6
+
+Host=tiny.ipv4
+ Hostname=134.215.222.243
+ User=aditya
+ Port=2022
+ AddressFamily=inet
+
+Host=tiny
+ Hostname=tiny.grot.org
+ User=aditya
+ Port=2022
+
+Host=some.lan
+ Hostname=10.7.37.48
+ User=aditya
+ Port=2022
+ AddressFamily=inet
+
+Host=some.ipv6
+ Hostname=2001:470:c17d:1::111
+ Port=2022
+ user=aditya
+ AddressFamily=inet6
+
+Host=unix
+ Hostname=10.20.7.93
+ User=raditya
+ Port=22
+
+Host=pip
+ Hostname=10.130.48.13
+ User=raditya
+ Port=22
+
+Host=pip.ipv6
+ Hostname=2a01:111:e210:2000::23
+ User=raditya
+ Port=22
+
+Host=rreg
+ Hostname=10.130.49.104
+ User=raditya
+ Port=22
+
+Host=rreg.ipv6
+ Hostname=2001:4898:80e8:ed31::3
+ AddressFamily=inet6
+ User=raditya
+ Port=22
+
+Host=prime
+ Hostname=prime-grot.cloudapp.net
+ Port=2022
+ User=rpaditya
+ TCPKeepalive=yes
+ ServerAliveInterval 30
+
+Host=pnw
+ Hostname=pnw-grot.cloudapp.net
+ Port=2022
+ User=aditya
+ TCPKeepalive=yes
+ ServerAliveInterval 30
+
+Host=gw.lan
+ Hostname=192.168.88.1
+ Port=2022
+ User=admin
+

@@ -1,0 +1,71 @@
+escape ^Tt
+startup_message off
+zombie on
+defflow off # will force iScreen to process ^S/^Q
+
+# can't use -X if password is set to switch screen windows
+#password LTbd/0EJUpvd6
+
+sessionname cygwin
+defscrollback 8192
+encoding UTF-8
+defutf8 on
+ignorecase on
+
+#colors in screen http://frexx.de/xterm-256-notes/
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+# tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# erase background with current bg color
+defbce "on"
+
+# 256 colors in emacs http://emacswiki.org/emacs/GnuScreen#toc6
+term screen
+
+setenv SSH_AUTH_SOCK $HOME/.ssh-agent-screen.groups
+setenv LC_ALL en_US.UTF-8
+setenv LANG en_US.UTF-8
+
+#
+#  Toggle 'fullscreen' or not.
+# from: http://www.debian-administration.org/articles/560
+#
+bind f eval "caption splitonly" "hardstatus ignore"
+#bind F eval "caption always"    "hardstatus alwayslastline"
+bind F eval "caption splitonly"    "hardstatus alwayslastline"
+
+# map the F1 key to esc for the Thinkpad keyboards
+bindkey -k k1 stuff ^[
+
+#backtick 1 5 5 /usr/admin/aditya/lib/sirc/tail
+
+# based on hardstatus from http://blog.eater.org/2008/12/new-screenrc-hardstatus-string.html
+#hardstatus alwayslastline 
+#
+#hardstatus string '%1` %-= %l@%H %n%t[%D %m/%d %c:%s]'
+# we don't need uptime@hostname window# and window name on the hardstatus line
+#hardstatus string '%1`%-=[%D %m/%d %c:%s]'
+
+# idle time in seconds
+#idle 300 lockscreen
+
+compacthist on
+#c1 off
+
+#xterm understands both im/ic and doesn't have a status line.
+#Note: Do not specify im and ic in the real termcap/info file as
+#some programs (e.g. vi) will not work anymore.
+termcap  xterm|fptwist hs@:cs=\E[%i%d;%dr:im=\E[4h:ei=\E[4l
+terminfo xterm|fptwist hs@:cs=\E[%i%p1%d;%p2%dr:im=\E[4h:ei=\E[4l
+#
+# allow mouse commands to be passed through screen
+termcapinfo xterm* ti@:te@
+
+# Key sequence ESC [ M uses invalid prefix characters
+
+screen -t zero 0
+screen -t one 1
+screen -t two 2
+screen -t emacs 3
