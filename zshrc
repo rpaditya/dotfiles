@@ -97,7 +97,7 @@ expand-or-complete-with-dots() {
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 
-. /usr/local/src/shell/z/z.sh
+[[ -r /usr/local/src/shell/z/z.sh ]] && . /usr/local/src/shell/z/z.sh
 function precmd () {
     _z --add "$(pwd -P)"
 }
