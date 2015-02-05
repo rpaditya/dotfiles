@@ -40,21 +40,11 @@ set ssl_force_tls = yes
 set smtp_authenticators = "login"
 
 fcc-hook ~A {outlook.office365.com}"Sent Items"
-set copy=yes
-# Saves copies of outgoing mail to "Sent Items" folder
 
 # how to query the exchange ldap database
 #set query_command = "~/bin/ldap.pl '%s'"
 #bind editor "\t" complete-query
 # tab completion uses address book over ldap instead of aliases
-
-# other usefull stuff
-set forward_quote
-set include
-set indent_str="> "
-
-# print through anything to postscript
-#set print_command="a2ps"
 
 macro index \ei "<change-folder>imaps://outlook.office365.com/INBOX<enter>"	"go to inbox folder"
 #macro index \es "<change-folder>imaps://outlook.office365.com/[Gmail]/Spam<enter>"	"go to remote spam folder"
