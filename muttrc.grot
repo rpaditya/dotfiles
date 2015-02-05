@@ -12,5 +12,5 @@ folder-hook . 'set folder=$HOME/Mail/grot'
 set record="$HOME/Mail/grot/Sent Items"
 
 # copy all the emails from the Maildir into the current inbox
-macro index i "<change-folder>~/Maildir<enter><tag-pattern>.<enter><tag-prefix-cond><save-message>+INBOX<enter><change-folder>+INBOX<enter>"
+macro index i "<change-folder>~/Maildir<enter><tag-pattern>.<enter><tag-prefix-cond><save-message>+INBOX<enter><end-cond><change-folder>+INBOX<enter>"
 
