@@ -1,0 +1,22 @@
+source "~/.mutt/common"
+
+set from = aditya@grot.org
+set my_domain="grot.org"
+
+set mbox_type = Maildir
+set spoolfile = ~/Mail/grot/INBOX
+set postponed = ~/Mail/grot/Drats
+
+set folder="$HOME/Mail/grot"      # Local mailboxes stored here
+folder-hook . 'set folder=$HOME/Mail/grot'
+set record="$HOME/Mail/grot/Sent Items"
+
+# Saves copies of outgoing mail to "Sent Items" folder
+set copy=yes
+
+
+# other usefull stuff
+set forward_quote
+set include
+set indent_str="> "
+

@@ -1,0 +1,231 @@
+unset help
+
+#set hostname=tiny.grot.org		# Name of our local host.
+set hidden_host				# Hide host details.
+
+set smart_wrap=yes
+set markers=no
+set delete=yes
+set wrapmargin=0
+set beep_new=no
+
+
+#set display_filter="fmt -80"
+# By default, don't do anything clever.
+#message-hook . "unset display_filter"
+
+#set display_filter="/usr/bin/sed s///g"
+
+# settings in bin/filters.dl
+set display_filter='~/bin/display-filter'
+
+macro pager l "<enter-command>set display_filter=/usr/bin/nl<enter><exit><display-message><enter-command> set display_filter=/usr/bin/sed s///g <enter>"
+
+# from http://wiki.mutt.org/?MacroSamples
+#macro pager ,@r13on "<enter-command> set display_filter=/usr/local/bin/rot13; macro pager \\er ,@r13off 'Toggle ROT13 decoding'<Enter><exit><display-message><enter-command> set ?display_filter<Enter>"
+#macro pager ,@r13off "<enter-command> unset display_filter; macro pager \\er ,@r13on 'Toggle ROT13 decoding'<Enter><exit><display-message><enter-command> set ?display_filter<Enter>"
+#macro pager r ,@r13on 'Toggle ROT13 decoding'
+
+## not enabled in this build
+##set header_cache = ~/.mutt/cache
+
+set certificate_file=~/Mail/SSL-certificates #Save IMAP-SSL certs here
+# gmail has an IDLE timer less than the 15 minutes the IMAP spec requires
+set imap_keepalive=300
+
+#When this variable is set, mutt will include Delivered-To headers when
+#bouncing messages.  Postfix users may wish to unset this variable.
+set bounce_delivered = no
+
+set move = no
+set nomarkers
+set pager_stop 
+
+set tilde  # show non-existant lines of text with a tilde at begin-of-line
+
+alternative_order text/plain text text/enriched text/html application/postscript image/* text/calendar
+auto_view text/html 
+auto_view application/msword 
+auto_view application/vnd.ms-word
+auto_view application/vnd.openxmlformats-officedocument.wordprocessingml.document
+auto_view text/enriched 
+auto_view application/rtf 
+auto_view application/pdf
+auto_view text/richtext
+auto_view text/rtf
+auto_view text/csv
+# auto_view application/octet-stream
+
+# as per http://www.spocom.com/users/gjohnson/mutt/#w3m
+# When in w3m, type a colon (:) to have w3m convert strings that look like URLs to links.
+#macro index \cB |w3m\n "call w3m to extract URLs out of a message"
+macro pager U |w3m\n "call w3m to extract URLs out of a message"
+
+macro pager u |/usr/local/bin/urlview\n "call urlview to extract URLs out of a message"
+
+set wait_key = no
+
+macro attach S 's=~/public_html/out/<enter>!chmod 644 ~/public_html/out/*.*'
+
+#mairix search (was previously bound to \cS but that doesn't seem to
+# work, why?)
+macro index \Cx "<change-folder-readonly>=mfolder\n<shell-escape>mairix " "Search via mairix"
+
+
+bind index n next-undeleted
+bind index p previous-undeleted
+bind index j next-entry
+bind index k previous-entry
+#bind index J
+#bind index K
+bind index P previous-entry
+bind index N next-entry
+#bind index \Ck exit
+bind index r group-reply
+bind index x sync-mailbox
+bind index q sync-mailbox
+bind index \Cx\Cc exit
+
+bind pager n next-entry
+bind pager p previous-entry
+bind pager j next-entry
+#bind pager J
+#bind pager K
+bind pager P previous-entry
+bind pager N next-entry
+bind pager p previous-entry
+bind pager r group-reply
+bind pager > bottom
+bind pager < top
+
+#bind editor \Cq complete-query
+
+#"%4C %Z %{%b %d} %-15.15L (%4l) %s" is default
+#set index_format = "%4C %Z %{%b %d} %-15.15L %s"
+#set index_format = "%3C %Z %{%m/%d %R} [%-15.15L] %s"
+set index_format = "%3C%Z %{%m/%d %R} [%-15.15L] %s"
+#set status_format = "-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"
+set status_format = "-%r-%_h:%f-(%s/%S)-%>-(P%p|T%t)---"
+
+set user_agent = no
+set timeout = 300
+set autoedit			# go to the editor right away when composing
+#set editor = /usr/local/bin/jove
+#set editor = /usr/local/bin/gnuclient
+set editor="~/.mutt/editor.sh"
+set nomark_old			# i don't care about whether a message is old
+set include			# always include messages when replying
+#set fast_reply			# skip initial prompts when replying
+set edit_hdrs
+
+#set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org|zapatec.com|umich.edu|gmail.com)
+#set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org|umich.edu)
+#set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org)
+#set forward_decode		# weed and MIME decode forwaded messages
+unset forw_decode
+
+set abort_nosubject=no		# do not abort if the subject is blank
+set abort_unmodified=yes	# do not abort replies if I don't change the message
+
+set noconfirmappend		# don't ask me if i want to append to mailboxes
+
+# Ignore all headers
+ignore *
+
+# Then un-ignore the ones I want to see
+unignore From:
+unignore To:
+unignore Reply-To:
+unignore Mail-Followup-To:
+unignore Subject:
+unignore Date:
+unignore Organization:
+unignore Newsgroups:
+unignore CC:
+unignore BCC:
+unignore Message-ID:
+#unignore X-Dspam
+unignore X-Envelope-To
+unignore X-Habeas-SWE-1
+unignore Delivered-To
+unignore Resent-
+unignore X-Mailer:
+unignore User-Agent:
+unignore X-Junked-Because:
+unignore X-SpamProbe:
+unignore X-Virus-hagbard:
+
+hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
+
+# Sort out silly characters from Microsoft MUAs or MUAs that suffer the same
+# problems.
+message-hook "~h \"X-Mailer: (Microsoft Outlook IMO|Experian ContactMail)\"" "set display_filter='tr \\\\200\\\\202\\\\221\\\\222\\\\223\\\\224\\\\225\\\\226\\\\227 \\\\244\\\\054\\\\140\\\\047\\\\042\\\\042\\\\052\\\\055\\\\055'"
+
+# IncrediMail, whatever the hell that is, sends out its text alternative as
+# DOS formatted text. Clean things up.
+message-hook "~h \"X-Mailer: IncrediMail" "set display_filter='tr -d \\\\r'"
+
+set realname =  "R.P. Aditya"
+set use_from = yes
+
+set reverse_name = yes
+set reverse_realname = no
+set reverse_alias = yes
+
+# don't unconditionally set my from to be the default!
+# send-hook . 'my_hdr From: "R.P. Aditya" <aditya@grot.org>'
+# unset the header from
+send-hook . 'unmy_hdr From:'
+send-hook . 'unset signature'
+
+#send-hook (nrenum.net|merit.edu|internet2.edu|cic.net|cisco.com|netapp.com|umich.edu|citrix.com) 'my_hdr From: "R.P. Aditya" <rpaditya@umich.edu>; set signature="~/.signature.umich.edu"'
+
+send-hook (cohousing-l@cohousing.org) 'my_hdr From: "R.P. Aditya" <aditya@grot.org>; set signature="~/.signature.gocoho.org"'
+
+#send-hook sakaiproject.org 'my_hdr From: "R.P. Aditya" <rpaditya@umich.edu>'
+#send-hook gmane.org 'my_hdr From: "R.P. Aditya" <rpaditya@umich.edu>'
+#send-hook (aharris|coon|dadas|danno|dmorton|hfweiss|hrosen|jilliand|kboblitt|krismcg|mjsickels|mjsickel|nerenber|rcj|preister|billdo|rhoort|settyrb|sweeton|patmyers|sbking|suhopdu|skardia|varel|willn)@.*umich.edu 'my_hdr From: "R.P. Aditya" <aditya@grot.org>'
+#send-hook zapatec.com 'my_hdr From: "R.P. Aditya" <aditya@zapatec.com>'
+send-hook gmail.com 'my_hdr From: "R.P. Aditya" <aditya@grot.org>'
+
+# for some reason doesn't stay in index mode before composition
+#macro index U '<enter-command>my_hdr From: "R.P. Aditya" <rpaditya@umich.edu><enter> <mail>'
+
+#my_hdr X-Gmane: encrypt
+#my_hdr Reply-To: "Aditya" <aditya@grot.org>
+
+my_hdr X-PGP-Key: http://www.grot.org/pubkey.asc
+my_hdr X-PGP-Key-ID: 0x6405D8D5
+
+# my_hdr X-Habeas-SWE-1: winter into spring                                
+# my_hdr X-Habeas-SWE-2: brightly anticipated                              
+# my_hdr X-Habeas-SWE-3: like Habeas SWE (tm)   
+# my_hdr X-Habeas-SWE-4: Copyright 2002 Habeas (tm)                      
+# my_hdr X-Habeas-SWE-5: Sender Warranted Email (SWE) (tm). The sender of this                 
+# my_hdr X-Habeas-SWE-6: email in exchange for a license for this Habeas
+# my_hdr X-Habeas-SWE-7: warrant mark warrants that this is a Habeas Compliant  
+# my_hdr X-Habeas-SWE-8: Message (HCM) and not spam. Please report use of this
+# my_hdr X-Habeas-SWE-9: mark in spam to < http://www.habeas.com.report/>. 
+
+#lists nanog postfix-announce postfix-users mutt-users toasters flowscan mrtd datacenter
+#subscribe nanog postfix-announce postfix-users mutt-users toasters flowscan datacenter
+#lists dnai-soc@lists.grot.org
+#subscribe dnai-soc@lists.grot.org
+#lists gated-eng@nexthop.com
+#lists watsops@umich.edu
+
+set sort = threads
+# from http://www.cmdln.org/2008/11/07/how-i-tamed-my-mutt/
+set sort_aux=last-date-received
+
+#-put deleted message into a different folder (not needed with MH)
+#macro index d "s=deleted<enter>"
+#macro pager d "s=deleted<enter>"
+
+#set pager_index_lines=0
+#set query_command = "mutt_ldap_query.pl '%s'"
+
+
+source ~/Mail/aliases
+source ~/Mail/gpg.rc
+source ~/.mutt/colors

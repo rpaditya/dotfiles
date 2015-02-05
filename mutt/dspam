@@ -1,0 +1,21 @@
+#
+# Dspam macros
+#
+#feeds Dspam this email to mark as spam and then puts it in the spam folder
+#macro index S <pipe-entry>'~/dspam/bin/dspam --deliver=spam --class=spam --feature=chained,noise --mode=teft --source=error --user aditya --stdout'<enter><save-message>'+spam'<enter> 'mark message as spam and move to spam folder'
+
+#feeds Dspam to mark this email as innocent and correct the source to be an error
+# that is this message is a false positive spam
+#macro index E <pipe-entry>'~/dspam/bin/dspam --class=innocent --feature=chained,noise --mode=teft --source=error --user aditya --stdout'<enter><save-message>'+inbox'<enter> 'feed dspam a false positive as innocent and move to inbox'
+
+#feeds Dspam to mark this email as innocent
+#macro index I <pipe-entry>'~/dspam/bin/dspam --class=innocent --feature=chained,noise --mode=teft --source=corpus --user aditya'<enter> 'feed dspam an innocent'
+
+#feed Dspam and see what this message is classed as
+#macro index V <pipe-entry>'~/dspam/bin/dspam --deliver=innocent,spam --mode=teft --user aditya --stdout | less'<enter>'view dspam analysis'
+
+#feed Dspam and see what this message is classed as
+#macro index C <pipe-entry>'~/dspam/bin/dspam --classify --user aditya | less'<enter>'view dspam classify'
+#
+# End Dspam macros
+#
