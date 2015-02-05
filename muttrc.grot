@@ -14,9 +14,11 @@ set record="$HOME/Mail/grot/Sent Items"
 # Saves copies of outgoing mail to "Sent Items" folder
 set copy=yes
 
-
 # other usefull stuff
 set forward_quote
 set include
 set indent_str="> "
+
+# copy all the emails from the Maildir into the current inbox
+macro index i "<change-folder>~/Maildir<enter><tag-pattern>.<enter><tag-prefix-cond><save-message>+INBOX<enter><change-folder>+INBOX<enter>"
 
