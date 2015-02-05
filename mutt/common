@@ -43,7 +43,7 @@ set pager_stop
 
 set tilde  # show non-existant lines of text with a tilde at begin-of-line
 
-alternative_order text/plain text text/enriched text/html application/postscript image/* text/calendar
+alternative_order text/plain text/enriched text/html application/postscript image/* text
 auto_view text/html 
 auto_view application/msword 
 auto_view application/vnd.ms-word
