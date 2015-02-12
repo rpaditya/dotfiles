@@ -1,0 +1,38 @@
+#text/enriched;  enriched.sh  ; copiousoutput
+##text/html; w3m -T text/html %s; needsterminal;
+##text/html;      lynx -dump %s; copiousoutput; nametemplate=%s.html
+#text/html;  w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput
+text/html;  w3m -dump %s; nametemplate=%s.html; copiousoutput
+# text/html; lynx -display-charset=UTF-8 -dump %s -assume_charset=%{charset}; nametemplate=%s.html; copiousoutput
+
+application/x-msword; open.pl %s
+#application/msword; /usr/local/bin/catdoc %s | less
+application/msword; /usr/local/bin/antiword %s ; copiousoutput
+application/vnd.ms-word; /usr/local/bin/antiword %s ; copiousoutput
+application/x-excel; open.pl %s
+#application/vnd.ms-excel; /usr/local/bin/xlhtml %s | w3m -dump; nametemplate=%s.html; copiousoutput
+application/vnd.ms-excel; /usr/local/bin/xlhtml -a -nc -fw -te %s - | w3m -dump; nametemplate=%s.html; copiousoutput
+application/pdf; /usr/local/bin/pdftotext %s - ; copiousoutput
+application/ms-rtf; /usr/local/bin/rtfreader %s ; copiousoutput
+application/rtf; /usr/local/bin/rtfreader %s | less ; copiousoutput
+text/csv; cat %s ; copiousoutput
+text/rtf; /usr/local/bin/rtfreader %s | less ; copiousoutput
+text/richtext; /usr/local/bin/rtfreader %s | less ; copiousoutput
+#application/postscript; /usr/local/bin/ps2ascii %s | less
+application/postscript; ps2ascii %s; copiousoutput
+application/x-perl; /usr/bin/less %s
+
+application/octet-stream; mutt.octet.filter %s; copiousoutput
+
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; /usr/admin/aditya/bin/docx2txt.pl %s - ; copiousoutput
+
+#application/octet-stream; /usr/bin/less %s
+#application/octet-stream; /usr/local/bin/tiff2ps -a2z %s | /usr/local/bin/ps2pdf13 - ~/public_html/out/fax.pdf
+
+image/tiff; /usr/local/bin/tiff2ps -a2z %s | /usr/local/bin/ps2pdf13 - ~/public_html/out/fax.pdf
+image/*;identify -verbose %s;copiousoutput
+#image/*;        anytopnm %s | pnmscale -xsize 80 -ysize 50 | ppmtopgm | pgmtopbm | pbmtoascii ; copiousoutput
+
+application/x-gunzip;   gzcat; copiousoutput
+application/x-tar-gz; gunzip -c %s | tar -tf - ; copiousoutput
+application/zip; unzip -l %s | less
