@@ -1,5 +1,9 @@
 source "~/.mutt/common"
 
+#override what is in the common file
+# show html by default in MS emails
+alternative_order text/html text/plain text/enriched image/* text
+
 set from = raditya@microsoft.com
 set imap_user="raditya@microsoft.com"
 set my_domain="microsoft.com"
