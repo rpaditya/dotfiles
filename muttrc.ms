@@ -17,3 +17,6 @@ set postponed = ~/Mail/ms/Drats
 set folder="$HOME/Mail/ms"      # Local mailboxes stored here
 folder-hook . 'set folder=$HOME/Mail/ms'
 set record="$HOME/Mail/ms/Sent Items"
+
+# copy all the emails from the Maildir into the current inbox
+macro index i "<change-folder>~/Maildir<enter><tag-pattern>.<enter><tag-prefix-cond><save-message>+INBOX<enter><end-cond><change-folder>+INBOX<enter>"
