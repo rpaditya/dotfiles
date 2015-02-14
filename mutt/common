@@ -1,7 +1,15 @@
 unset help
 
-set hostname=tiny.grot.org		# Name of our local host.
+#set hostname=tiny.grot.org		# Name of our local host.
 set hidden_host				# Hide host details.
+
+# Saves copies of outgoing mail to "Sent Items" folder
+set copy=yes
+
+# other usefull stuff
+set forward_quote
+set include
+set indent_str="> "
 
 set smart_wrap=yes
 set markers=no
@@ -43,7 +51,7 @@ set pager_stop
 
 set tilde  # show non-existant lines of text with a tilde at begin-of-line
 
-alternative_order text/plain text text/enriched text/html application/postscript image/*
+alternative_order text/plain text/enriched text/html application/postscript image/* text
 auto_view text/html 
 auto_view application/msword 
 auto_view application/vnd.ms-word
@@ -124,6 +132,7 @@ set edit_hdrs
 # doesn't work on Debian complied mutt, see /usr/share/doc/mutt/NEWS.Debian.gz
 #
 #set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org|microsoft.com)
+#set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org)
 #set forward_decode		# weed and MIME decode forwaded messages
 unset forw_decode
 
@@ -228,6 +237,8 @@ set sort_aux=last-date-received
 #set pager_index_lines=0
 #set query_command = "mutt_ldap_query.pl '%s'"
 
+# print through anything to postscript
+#set print_command="a2ps"
 
 source ~/Mail/aliases
 source ~/Mail/gpg.rc

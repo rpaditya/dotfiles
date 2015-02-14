@@ -12,7 +12,3 @@ emacsclient -nw -a ~/.mutt/alteditor.sh "$@"
 #else
 # emacsclient -nw -a ~/.mutt/alteditor.sh "$@"
 #fi
-
-
-
-

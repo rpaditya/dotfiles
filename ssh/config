@@ -1,5 +1,5 @@
 Host=src.grot.org
- Hostname=tiny.grot.org
+ Hostname=some.lan.grot.org
  Port=2022
  User=aditya
  AddressFamily=inet6

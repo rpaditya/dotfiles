@@ -1,0 +1,58 @@
+source "~/.mutt/common"
+
+set from = raditya@microsoft.com
+set imap_user="raditya@microsoft.com"
+set my_domain="microsoft.com"
+
+#bind index "\Ca" 'imap-fetch-mail'
+bind index i 'imap-fetch-mail'
+
+#set folder={outlook.office365.com}
+#set spoolfile={outlook.office365.com}INBOX
+
+#
+# from https://github.com/ork/mutt-office365/blob/master/muttrc
+#
+set folder="imaps://outlook.office365.com/"
+set spoolfile= +INBOX
+#set postponed= +$my_drafts_noquote
+#set record = +$my_sent_noquote
+#set trash = +$my_trash_noquote
+#mailboxes
+
+set imap_check_subscribed="yes"
+set imap_list_subscribed="yes"
+set timeout=15
+set mail_check=90
+set imap_keepalive=180
+set imap_idle
+unset mark_old
+set ssl_use_sslv3=yes
+
+# SMTP config
+#set realname = $my_realname
+#set from = "$my_username@$my_domain"
+set smtp_pass = $imap_pass
+set hostname = "microsoft.com"
+#set smtp_url = "smtp://$my_username@$my_domain@outlook.office365.com:587/"
+set smtp_url = "smtp://$from@outlook.office365.com:587/"
+set ssl_force_tls = yes
+set smtp_authenticators = "login"
+
+fcc-hook ~A {outlook.office365.com}"Sent Items"
+
+# how to query the exchange ldap database
+#set query_command = "~/bin/ldap.pl '%s'"
+#bind editor "\t" complete-query
+# tab completion uses address book over ldap instead of aliases
+
+macro index \ei "<change-folder>imaps://outlook.office365.com/INBOX<enter>"	"go to inbox folder"
+#macro index \es "<change-folder>imaps://outlook.office365.com/[Gmail]/Spam<enter>"	"go to remote spam folder"
+#macro index \et "<change-folder>imaps://outlook.office365.com/[Gmail]/Trash<enter>"	"go to remote trash folder"
+#macro index \ex "<change-folder>imaps://outlook.office365.com/[Gmail]/Starred<enter>"	"go to remote starred folder"
+
+set message_cachedir = "~/Mail/imap-cache"
+
+# http://pthree.org/2012/01/07/encrypted-mutt-imap-smtp-passwords/
+source "/usr/local/bin/gpg -d ~/dotfiles.some/msimappass.gpg |"
+

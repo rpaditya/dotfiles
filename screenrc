@@ -3,9 +3,6 @@ startup_message off
 zombie on
 defflow off # will force iScreen to process ^S/^Q
 
-# can't use -X if password is set to switch screen windows
-#password LTbd/0EJUpvd6
-
 sessionname cygwin
 defscrollback 8192
 encoding UTF-8

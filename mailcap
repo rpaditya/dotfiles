@@ -28,8 +28,11 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document; /usr/ad
 
 #application/octet-stream; /usr/bin/less %s
 #application/octet-stream; /usr/local/bin/tiff2ps -a2z %s | /usr/local/bin/ps2pdf13 - ~/tmp/fax.pdf
-
 image/tiff; /usr/local/bin/tiff2ps -a2z %s | /usr/local/bin/ps2pdf13 - ~/tmp/fax.pdf
+
+#application/octet-stream; /usr/local/bin/tiff2ps -a2z %s | /usr/local/bin/ps2pdf13 - ~/public_html/out/fax.pdf
+#image/tiff; /usr/local/bin/tiff2ps -a2z %s | /usr/local/bin/ps2pdf13 - ~/public_html/out/fax.pdf
+
 image/*;identify -verbose %s;copiousoutput
 #image/*;        anytopnm %s | pnmscale -xsize 80 -ysize 50 | ppmtopgm | pgmtopbm | pbmtoascii ; copiousoutput
 
