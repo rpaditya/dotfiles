@@ -1,16 +1,33 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-PIDFILE=~/.offlineimap/pid
+# Check every ten seconds if the process identified as $1 is still 
+# running. After 5 checks (~60 seconds), kill it. Return non-zero to 
+# indicate something was killed.
+monitor() {
+  local pid=$1 i=0
 
-logger -p info "starting mailrun.sh"
-read -r pid < ${PIDFILE}
+  while ps $pid &>/dev/null; do
+    if (( i++ > 5 )); then
+      logger -p crit "Max checks reached. Sending SIGKILL to ${pid}..."
+#      echo "Max checks reached. Sending SIGKILL to ${pid}..." >&2
+      kill -9 $pid; return 1
+    fi
 
-if ! pgrep -F ~/.offlineimap/pid; then
-  logger -p crit "Process $pid already running. Exiting..."
+    sleep 10
+  done
+
+  return 0
+}
+
+read -r pid < ~/.offlineimap/pid
+
+if ps $pid &>/dev/null; then
+  logger -p crit "Process ${pid} already running. Exiting..."
+#  echo "Process $pid already running. Exiting..." >&2
   exit 1
-else
-  logger -p info "running offlineimap"
-  offlineimap -o -u quiet
 fi
 
-logger -p info "end mailrun.sh"
+logger -p info "Starting offlineimap"
+offlineimap -o -u quiet & monitor $!
+logger -p info "end of mailrun.sh/offlineimap script"
+
