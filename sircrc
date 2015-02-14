@@ -1,0 +1,15 @@
+/set eight_bit on
+/load rotatelogs.pl
+/rotatelogs
+# logfiles and rotation is now done in the above pl file
+#/set logfile /usr/admin/aditya/dotfiles/mcabber/histo/sirc.log
+#/set log on
+/alias rn /next
+/load www.pl
+/load quiet.pl
+/quiet &bitlbee
+/load screen-away.pl
+/screenautoaway
+/load hush.pl
+#/join &bitlbee
+#/ignore &bitlbee modes 

@@ -1,0 +1,50 @@
+;; Red Hat Linux default .emacs initialization file
+
+;; Are we running XEmacs or Emacs?
+(defvar running-xemacs (string-match "XEmacs\\|Lucid" emacs-version))
+
+;; Set up the keyboard so the delete key on both the regular keyboard
+;; and the keypad delete the character under the cursor and to the right
+;; under X, instead of the default, backspace behavior.
+(global-set-key [delete] 'delete-char)
+(global-set-key [kp-delete] 'delete-char)
+
+(global-set-key "\eg" 'goto-line)
+
+;; Turn on font-lock mode for Emacs
+(cond ((not running-xemacs)
+       (global-font-lock-mode nil)
+       (menu-bar-mode nil)
+))
+
+;; Always end a file with a newline
+(setq require-final-newline t)
+
+;; Stop at the end of the file, not just add lines
+(setq next-line-add-newlines nil)
+
+;; Enable wheelmouse support by default
+(if (not running-xemacs)
+	(require 'mwheel) ; Emacs
+	(mwheel-install) ; XEmacs
+)
+
+;; Reverse screen's reverse of C-h
+(setq paren-mode 'paren)
+(keyboard-translate ?\C-h ?\C-?)
+;(keyboard-translate ?\C-? ?\C-h)
+
+;; (add-to-list 'load-path "~/.emacs.d")
+;; (require 'vc-svn)
+;; (add-to-list 'vc-handled-backends `SVN)
+;; (require 'vc-git)
+;; (add-to-list 'vc-handled-backends `GIT)
+
+
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+(server-start)

@@ -1,0 +1,61 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Color definitions
+# http://www.mutt.org/doc/manual/manual-3.html
+# foreground and background can be one of the following:
+#
+#    white
+#    black
+#    green
+#    magenta
+#    blue
+#    cyan
+#    yellow
+#    red
+#    default
+#    colorx
+#
+# foreground can optionally be prefixed with the keyword bright to make
+# the foreground color boldfaced (e.g., brightred).
+#
+# If your terminal supports it, the special keyword default can be used as
+# a transparent color. The value brightdefault is also valid.
+
+#color normal white default
+color normal black default
+
+color hdrdefault red default
+color header brightred default ^(From|Subject):
+
+#color quoted brightblue default
+color quoted blue default
+#color quoted blue black
+
+color signature red default
+color indicator brightyellow red
+color error brightred default
+color status brightyellow blue
+color tree magenta default      # the thread tree in the index menu
+color tilde magenta default
+#color message brightcyan default
+color message blue default
+#color markers brightcyan default
+color markers blue default
+color attachment brightmagenta default
+color search default green      # how to hilite search patterns in the pager
+
+# point out various things in the body
+# uris
+color body magenta default "(ftp|http|https|file)://[^ ]+"
+# ipv4 addresses
+color body magenta default \d+(\.\d+){3}
+# email addresses
+color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+
+# hiddne things
+color body magenta default "^\\[---\=[|].*"
+
+color underline brightgreen default
+
+# attributes when using a mono terminal
+#mono header underline ^(From|Subject):
+mono quoted bold

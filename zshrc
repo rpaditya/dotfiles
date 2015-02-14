@@ -18,16 +18,14 @@ export VISUAL=~/.mutt/editor.sh
 autoload -U compinit
 compinit
 
-path=($path /usr/local/pgsql/bin /usr/local/jdk1.4.2/bin /usr/local/libexec/git-core)
-export PACKAGESITE=ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/i386/packages-5-stable/Latest/
+path=($path /usr/bin/mh ~/bin)
+#export PACKAGESITE=ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/i386/packages-5-stable/Latest/
+export PACKAGESITE=ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/i386/packages-stable/Latest/
 
 export TZ=America/Detroit
 
 export SCREENDIR="${HOME}/.screen"
 export SSH_AUTH_SOCK="${HOME}/.ssh-agent-screen.groups"
-
-export JAVA_OPTS="-server -Xms256m -Xmx256m"
-export JAVA_HOME=/usr/local/jdk1.4.2
 
 export CVS_RSH="`which ssh`"
 #export CVSROOT='five:/usr/local/cvs/'
@@ -36,11 +34,15 @@ export CVS_RSH="`which ssh`"
 #export GIT_DIR="/trunk/grot/git"
 #export GIT_WORK_TREE="/usr/admin/aditya"
 
+#export JAVA_OPTS="-server -Xms256m -Xmx256m"
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+
 CLASSPATH=.
 CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/rt.jar
-CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/ext/pg74.213.jdbc3.jar
-CLASSPATH=$CLASSPATH:/usr/local/src/java/libreadline-java-0.8.0/libreadline-java.jar
-CLASSPATH=$CLASSPATH:$HOME/lib/henplus/henplus.jar
+CLASSPATH=$CLASSPATH:/usr/share/java
+#CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/ext/pg74.213.jdbc3.jar
+#CLASSPATH=$CLASSPATH:/usr/local/src/java/libreadline-java-0.8.0/libreadline-java.jar
+#CLASSPATH=$CLASSPATH:$HOME/lib/henplus/henplus.jar
 
 export CLASSPATH
 export NNTPSERVER="news.gmane.org"
@@ -60,7 +62,8 @@ export COLORFGBG="default;default"
 # cpan    (perl -MCPAN -e shell)
 # glog    gsub -eak aditya@grot.org >>& ~/.glog &
 # gsend   gsend -t message/image=http://www.grot.org/aditya.gif
-alias -r inc='incdir -a -i ~/Mail/inbox'
+#alias -r inc='incdir -a -i ~/Mail/inbox'
+alias -r inc='incdir -a -i /mnt/aditya/tiny.grot.org/Mail/inbox'
 # india   setenv TZ Asia/Calcutta; date; setenv TZ UTC
 alias -r india='date -u -v+5H -v+30M'
 # ls      ls-F
@@ -97,7 +100,8 @@ expand-or-complete-with-dots() {
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 
-. /usr/local/src/shell/z/z.sh
-function precmd () {
-    _z --add "$(pwd -P)"
-}
+# . /usr/local/src/shell/z/z.sh
+# function precmd () {
+#    _z --add "$(pwd -P)"
+# }
+

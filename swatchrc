@@ -1,0 +1,9 @@
+# -*- mode: perl -*- 
+# Personal Swatch configuration file
+#
+watchfor = /ERROR/
+    echo=blue
+
+ignore = /\w+\.info/
+watchfor = /.*/
+	echo=black
