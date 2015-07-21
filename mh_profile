@@ -1,0 +1,64 @@
+# Time-stamp: <1996/11/27 18:33:23 aditya>
+#MailDrop: mailbox
+#Aliasfile: alias.ali
+#Alternate-Mailboxes: aditya@*
+Draft-folder: drafts
+Editor: /home/aditya/.mutt/editor.sh
+Folder-protect: 0700
+Msg-protect: 0600
+#Path: Mail
+Path: /mnt/aditya/tiny.grot.org/Mail
+#Signature: <aditya@dnai.com>
+#Signature: "Ramaswamy P. Aditya" <aditya@dnai.com>
+ali: -list
+dist: -editor prompter
+forw:  -form components -format -nodash
+compeer: -form components.peer
+#inc: -silent
+mhl: -nobell
+moreproc: less
+pick: -seq picked
+prompter-next: jove
+repl: -cc all -nocc me -fcc +outbox -annotate -inplace -filter mhl.repl
+rpprompter: -noprepend -rapid
+Unseen-Sequence: unseen
+usc: -form scan.unseen
+scan: -form scan.MMDDYY
+#scan: -form scan.time
+#scan: -form scan.aditya
+#send: -verbose -watch -snoop
+#showa: -form mhl.all
+showa: -noshowproc
+showproc: mhl
+mhn: -nolist
+#automhnproc: less
+#automhnproc: mhn
+#mhn-storage: /tmp
+mhn-charset-iso-8859-1: less %s
+mhshow-charset-iso-8859-1: %s
+#mhn-charset-iso-8859-1: %s
+#mhn-charset-us-ascii: less %s
+#Content-Type: text/plain; charset=ISO-8859-1
+#mhn-show-application/PostScript: %pghostview %f
+#mhn-show-application/PostScript: %plp -dps
+mhn-show-application/pgp: %ppgp -m '%F'
+mhn-show-application/x-pgp: %ppgp -m '%F'
+mhn-show-binary: %pless '%F'
+#mhn-show-multipart/report: less %f
+mhn-show-text/plain: %p less %f
+#mhn-show-text: %pless '%F'
+mhn-show-text/plain: less '%F'
+mhn-show-text/pgp: %ppgp -m '%F'
+mhn-show-text/richtext: richtext -p '%F'
+mhn-show-text/x-pgp: %ppgp -m '%F'
+mhn-store-application/PostScript: %m%P.ps
+mhn-store-application/pgp: %m%P.pgp
+mhn-store-application/x-pgp: %m%P.pgp
+mhn-store-image/gif: %m%P.gif
+mhn-store-image/jpeg: %m%P.jpg
+mhn-store-image: %m%P.img
+mhn-store-text/pgp: %m%P.pgp
+mhn-store-text/richtext: %m%P.rt
+mhn-store-text/x-pgp: %m%P.pgp
+mhn-store-text: %m%P.txt
+mhn-store-video/mpeg: %m%P.mpg

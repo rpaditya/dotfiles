@@ -22,6 +22,7 @@
 # a transparent color. The value brightdefault is also valid.
 
 #color normal white default
+color normal black default
 
 color hdrdefault red default
 color header brightred default ^(From|Subject):
@@ -50,7 +51,7 @@ color body magenta default "(ftp|http|https|file)://[^ ]+"
 color body magenta default \d+(\.\d+){3}
 # email addresses
 color body magenta default [-a-z_0-9.]+@[-a-z_0-9.]+
-# hiddne things
+# hidden things
 color body magenta default "^\\[---\=[|].*"
 
 color underline brightgreen default

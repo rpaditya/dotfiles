@@ -2,8 +2,7 @@ escape ^Tt
 startup_message off
 zombie on
 defflow off # will force iScreen to process ^S/^Q
-
-sessionname cygwin
+sessionname pnw
 defscrollback 8192
 encoding UTF-8
 defutf8 on
@@ -19,6 +18,10 @@ termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce "on"
 
 # 256 colors in emacs http://emacswiki.org/emacs/GnuScreen#toc6
+#term screen-256color
+#
+# screen-256color is unsupported on too many platforms
+#
 term screen
 
 setenv SSH_AUTH_SOCK $HOME/.ssh-agent-screen.groups
@@ -39,14 +42,14 @@ bindkey -k k1 stuff ^[
 #backtick 1 5 5 /usr/admin/aditya/lib/sirc/tail
 
 # based on hardstatus from http://blog.eater.org/2008/12/new-screenrc-hardstatus-string.html
-#hardstatus alwayslastline 
+hardstatus alwayslastline 
 #
 #hardstatus string '%1` %-= %l@%H %n%t[%D %m/%d %c:%s]'
 # we don't need uptime@hostname window# and window name on the hardstatus line
-#hardstatus string '%1`%-=[%D %m/%d %c:%s]'
+hardstatus string '%1`%-=[%D %m/%d %c:%s]'
 
 # idle time in seconds
-#idle 300 lockscreen
+idle 300 lockscreen
 
 compacthist on
 #c1 off
@@ -62,8 +65,36 @@ termcapinfo xterm* ti@:te@
 
 # Key sequence ESC [ M uses invalid prefix characters
 
-screen -t zero 0
+screen -t zero 0 ssh tiny
 screen -t one 1
-screen -t two 2
-screen -t emacs 3
-screen -t twitter 18 sirc -R -n rpaditya -s im.bitlbee.org
+screen -t mutt 2 ssh tiny
+screen -t emacs 3 ssh rpaditya@localhost
+screen -t four 4 ssh rpaditya@localhost
+screen -t five 5 ssh rpaditya@localhost
+screen -t six 6 ssh rpaditya@localhost
+screen -t some 7 ssh some.ipv4
+screen -t swatch 8 swatch
+screen -t check 9 ssh check@localhost
+screen -t psql 10
+screen -t gocoho 11 ssh gocoho
+screen -t mini 12 ssh some.ipv4
+screen -t mu2 13 
+screen -t vps 14 ssh prime
+screen -t onefive 15
+screen -t onesix 16
+screen -t images 17
+screen -t twitter 18 sirc -Rn rpaditya -s im.bitlbee.org
+screen -t mu5 19
+screen -t mu-swatch 20
+screen -t talk 21 sirc -n aditya -s 127.0.0.1
+screen -t mu4 22
+screen -t chivas 23
+screen -t trove 24 ssh some.ipv4
+
+#split
+#split
+#screen -t desktop 0 tcpdump -ni desktop not port 22
+#focus
+#screen -t external 1 tcpdump -ni external not port 22
+#focus
+#screen -t server 2 tcpdump -ni server not port 22

@@ -1,0 +1,53 @@
+define-macro kill-line ^[xbeginning-of-line^M^[xset-mark^M^[xnext-line^M^[xkill-region^M^[xpop-mark^M
+
+auto-execute-command auto-fill-mode .*\.tmp
+auto-execute-command auto-fill-mode .*\.txt
+auto-execute-command auto-fill-mode .*\.letter
+auto-execute-command auto-fill-mode .*\.article
+auto-execute-command auto-fill-mode .*/Mail/.*
+auto-execute-command auto-fill-mode .*/mutt.*
+
+auto-execute-command c-mode .*\.[cChy]$\|.*\.js$\|.*\.jsp$
+auto-execute-command lisp-mode .*\.l$\|.*\.lisp$\|.*\.scm$
+
+auto-execute-command c-mode .*\.java$
+auto-execute-command c-mode .*\.pl$
+auto-execute-command c-mode .*w3mtmp.*$
+
+# all the languages need show-match-mode.
+auto-execute-command show-match-mode .*\.jsp$
+auto-execute-command show-match-mode .*\.[lcChyfp]$
+#auto-execute-command show-match-mode .*\.scm$
+#auto-execute-command show-match-mode .*\.lisp$
+auto-execute-command show-match-mode .*\.java$
+auto-execute-command show-match-mode .*\.pl$
+
+# This makes the arrow keys work on most terminals.
+bind-to-key previous-line ^[[A
+bind-to-key next-line ^[[B
+bind-to-key forward-character ^[[C
+bind-to-key backward-character ^[[D
+bind-to-key previous-line ^[OA
+bind-to-key next-line ^[OB
+bind-to-key forward-character ^[OC
+bind-to-key backward-character ^[OD
+
+# An alternative modeline with better usage of the space.
+#set mode-line %[Jove%]%w%w%c(%M)%3c[%b:%n]%2c"%f"%c%i# %m*-%2c%p%2s%(%d%e(%t)%)
+#set mode-line %d%s%f%s%w%M%s%n%C%s(%t)
+set mode-line %n[%i# %m*-](%M)%f%e%(%t%)
+
+# Modern terminals do not need ^S/^Q for flow control.
+# The exceptions (e.g. vt100) should turn it off again in jove.rc.TERM.
+set allow-^S-and-^Q on
+
+set match-regular-expressions on
+set shell /bin/tcsh
+
+bind-to-key clear-and-redraw ^L
+bind-to-key i-search-forward 
+bind-to-key i-search-reverse ^R
+bind-to-key suspend-jove 
+
+# source any TERMinal-specific rc file
+#source /usr/local/share/jove/jove.rc.$TERM

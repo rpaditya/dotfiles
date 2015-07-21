@@ -128,6 +128,10 @@ set edit_hdrs
 
 #set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org|zapatec.com|umich.edu|gmail.com)
 #set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org|umich.edu)
+#
+# doesn't work on Debian complied mutt, see /usr/share/doc/mutt/NEWS.Debian.gz
+#
+#set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org|microsoft.com)
 #set alternates=(r.p.aditya|rpaditya|raditya|aditya|adi)@(gocoho.org|grot.org)
 #set forward_decode		# weed and MIME decode forwaded messages
 unset forw_decode
