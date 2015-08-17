@@ -15,3 +15,6 @@ ssh:
 
 twitter:
 	${HOME}/sirc/sirc -q -Q -R -n rpaditya -s im.bitlbee.org
+
+apt:
+	apt-cyg -m http://mirrors.163.com/cygwin/ update
