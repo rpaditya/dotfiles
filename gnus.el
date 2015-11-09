@@ -1,6 +1,6 @@
 (setq user-full-name "R.P. (Adi) Aditya")
-(setq user-mail-address "raditya@microsoft.com")
-(setq gnus-ignored-from-addresses "raditya@microsoft.com")
+(setq user-mail-address "aditya@grot.org")
+(setq gnus-ignored-from-addresses "aditya@grot.org")
 
 (require 'bbdb)
 (bbdb-initialize 'message 'gnus 'sc)
@@ -17,7 +17,7 @@
 ;(setq bbdb/news-auto-create-p 'bbdb-prune-not-to-me)
 ;(setq bbdb/message-auto-create-p 'bbdb-prune-not-to-me)
 
-(setq bbdb-ignore-some-messages-alist (quote (("From" . "yammer.com") ("Reply-To" . "yammer.com") ("To" . "yammer.com"))))
+;; (setq bbdb-ignore-some-messages-alist (quote (("From" . "yammer.com") ("Reply-To" . "yammer.com") ("To" . "yammer.com"))))
 (setq bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook)
 (setq bbdb/news-auto-create-p 'bbdb-ignore-some-messages-hook)
 (setq bbdb/message-auto-create-p 'bbdb-ignore-some-messages-hook)
@@ -120,14 +120,13 @@ Sent: %A, %B %d, %Y %H:%M %Z
 (setq gnus-large-newsgroup 'nil)
 
 (setq gnus-select-method 
-      '(nnmaildir "mso365" 
-                  (directory "~/Mail/")
+      '(nntp "news.gmane.org"))
+
+(setq gnus-secondary-select-method
+      '(nnmaildir "grot" 
+                  (directory "/home/rpaditya/Mail/")
                   (directory-files nnheader-directory-files-safe) 
                   (get-new-mail nil)))
-
-;(setq gnus-secondary-select-method
-;      '(nntp "news.gmane.org"))
-
 
 ;(define-key gnus-summary-mode-map "d" 'gnus-summary-mark-as-expirable)
 ; http://comments.gmane.org/gmane.emacs.gnus.general/82591
@@ -135,7 +134,7 @@ Sent: %A, %B %d, %Y %H:%M %Z
   (interactive)
   (gnus-summary-move-article nil gmail-trash-newsgroup))
 
-(setq gmail-trash-newsgroup "nnmaildir+mso365:grot.Trash")
+(setq gmail-trash-newsgroup "nnmaildir+grot:Trash")
 ;(define-key gnus-summary-mode-map "d" 'gnus-move-to-trash)
 
 (setq bbdb-send-mail-style 'gnus)
@@ -189,19 +188,7 @@ Sent: %A, %B %d, %Y %H:%M %Z
 (setq gnus-total-expirable-newsgroups
           (regexp-opt '("grot.bulk"
 			"grot.Spam"
-			"grot.auto"
-			"ms.sellbuy"
-			"ms.msbike"
-			"ms.homeown"
-			"ms.wwcomifm"
-			"ms.litebulb"
-			"ms.car"
-			"ms.moc"
-			"ms.yammer"
-			"ms.mstamil"
-			"ms.invclub"
-			"ms.parents"
-			"ms.mssoc")))
+			"grot.auto")))
 
 (defun my-message-mode-setup ()
   (setq make-backup-files nil)
@@ -387,8 +374,8 @@ is precedense 'junk' or 'bulk' This code is from Ronan Waide < waider
         ;; Here's where you put your email information.
         ;; Basically, you just add all the regexps you want for
         ;; both the 'to' field and the 'cc' field.
-        (if (and (not (string-match "raditya@microsoft.com" (or to "")))
-                 (not (string-match "raditya@microsoft.com" (or cc ""))))
+        (if (and (not (string-match "aditya@grot.org" (or to "")))
+                 (not (string-match "aditya@grot.org" (or cc ""))))
             (progn
               (message "BBDB unfiling; message to: %s cc: %s"
                        (or to "noone") (or cc "noone"))
