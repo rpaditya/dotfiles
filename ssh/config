@@ -5,6 +5,9 @@
 Host=unix
  Hostname=co1gnsunix02.phx.gbl
 
+Host=unix1
+ Hostname=co1gnsunix01.phx.gbl
+
 #db5gnsunix01.phx.gbl
 #db5gnsunix02.phx.gbl
 #sg2gnsunix01.phx.gbl
@@ -114,4 +117,9 @@ Host=gw.lan
 Host=dri
  Hostname=gns-raditya-a3
  Port=2022
+ User=raditya
+
+Host=udri
+ Hostname=gns-raditya-a3
+ Port=2024
  User=raditya
