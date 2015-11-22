@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/local/bin/bash
 
 
 cleanup() {
@@ -12,7 +12,7 @@ monitor() {
   local pid=$1 i=0
 
   while ps $pid &>/dev/null; do
-    if (( i++ > 12 )); then
+    if (( i++ > 35 )); then
       logger -p crit "Max checks reached. Sending SIGKILL to ${pid}..."
 #      echo "Max checks reached. Sending SIGKILL to ${pid}..." >&2
       kill -9 $pid; return 1
