@@ -248,7 +248,10 @@ set wrap_flags 7
 
 % set art_status_line "%p%n : %s %-20g -- %L (%P)"
 set overview_date_format "%m/%d %H:%M"
-header_display_format 0 "%S%B%F %D [%15r]%t %s "
+% header_display_format 0 "%S%B%F %D [%15r]%t %s "
+
+header_display_format 0 "%14r%t %s "
+
 group_display_format 0 "  %F%-5u %n"
 
 %
