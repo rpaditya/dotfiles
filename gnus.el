@@ -55,6 +55,7 @@
 ; '(( "no.?reply\\|DAEMON\\|daemon\\|facebookmail\\|twitter"))
 )
 
+<<<<<<< HEAD
 (autoload 'sc-cite-original "supercite")
 (bbdb-insinuate-sc)
 ;
@@ -78,13 +79,44 @@
 
 ;; If you even want it more Outlook-ish:
 (setq message-citation-line-format
+=======
+(if user-mail-address "aditya@grot.org"
+    ((autoload 'sc-cite-original "supercite")
+     (bbdb-insinuate-sc)
+; comment out the next two lines if you want to
+; use the outlook format quoting as defined below rather than supercite
+     (add-hook 'mail-citation-hook 'sc-cite-original)
+     (setq message-cite-function 'sc-cite-original)
+     (setq message-citation-line-format
+      "-----------------------
+On %a, %b %d %Y, %N wrote:
+")
+))
+
+(if user-mail-address "raditya@microsoft.com"
+;;; outlook style reply block ;;;
+;; from http://permalink.gmane.org/gmane.emacs.gnus.general/68510
+    ((setq message-citation-line-function 'message-insert-formatted-citation-line)
+     (setq message-cite-reply-above t)
+     (setq message-yank-prefix ""
+	   message-yank-cited-prefix ""
+	   message-yank-empty-prefix "")
+
+     ;; If you even want it more Outlook-ish use this:
+     (setq message-citation-line-format
+>>>>>>> a57913211e7350e0a186d9e5923d7dcb79e2d2c6
       "\
 -----Original Message-----
 From: %f
 Sent: %A, %B %d, %Y %H:%M %Z
 ")
+<<<<<<< HEAD
 
 
+=======
+;;; outlook-style reply block ;;;
+))
+>>>>>>> a57913211e7350e0a186d9e5923d7dcb79e2d2c6
 
 ;;sMTP
 (setq smtpmail-smtp-server "localhost")
@@ -124,7 +156,11 @@ Sent: %A, %B %d, %Y %H:%M %Z
 
 (setq gnus-secondary-select-method
       '(nnmaildir "grot" 
+<<<<<<< HEAD
                   (directory "/home/rpaditya/Mail/")
+=======
+                  (directory "~/Mail/grot")
+>>>>>>> a57913211e7350e0a186d9e5923d7dcb79e2d2c6
                   (directory-files nnheader-directory-files-safe) 
                   (get-new-mail nil)))
 
@@ -186,9 +222,15 @@ Sent: %A, %B %d, %Y %H:%M %Z
 ;           "INBOX.dl\\|msbike\\|sellbuy\||mssoc\||homeown\||invclub\||yammer")
 
 (setq gnus-total-expirable-newsgroups
+<<<<<<< HEAD
           (regexp-opt '("grot.bulk"
 			"grot.Spam"
 			"grot.auto")))
+=======
+          (regexp-opt '("bulk"
+			"Spam"
+			"auto")))
+>>>>>>> a57913211e7350e0a186d9e5923d7dcb79e2d2c6
 
 (defun my-message-mode-setup ()
   (setq make-backup-files nil)
@@ -205,7 +247,11 @@ Sent: %A, %B %d, %Y %H:%M %Z
   ;Put the cursor just where I want it - at the beginning of the body text.
   ;(bbdb-mail-aliases)
   (bbdb-define-all-aliases)
+<<<<<<< HEAD
   (set-buffer-file-coding-system utf-8-dos)
+=======
+;;  (set-buffer-file-coding-system utf-8-dos)
+>>>>>>> a57913211e7350e0a186d9e5923d7dcb79e2d2c6
 )
 
 (autoload 'bbdb/gnus-lines-and-from "bbdb-gnus")
@@ -390,6 +436,7 @@ is precedense 'junk' or 'bulk' This code is from Ronan Waide < waider
             ;; Otherwise add, subject to filtering
             (bbdb-ignore-some-messages-hook)))))))
 
+<<<<<<< HEAD
 ;(autoload 'wl "wl" "Wanderlust" t)
 
 (require 'w3m)
@@ -420,6 +467,38 @@ is precedense 'junk' or 'bulk' This code is from Ronan Waide < waider
 ;(add-to-list 'desktop-buffer-handlers 'desktop-buffer-w3m)
 ;(add-to-list 'desktop-buffer-misc-functions 'desktop-buffer-w3m-misc-data)
 ;(add-to-list 'desktop-buffer-modes-to-save 'w3m-mode)
+=======
+;; ;(autoload 'wl "wl" "Wanderlust" t)
+
+;; (require 'w3m)
+;; (require 'w3m-load)
+;; ; from http://www.emacswiki.org/emacs/WThreeMHintsAndTips
+;; (setq w3m-use-cookies t)
+;; (setq browse-url-browser-function 'w3m-browse-url
+;;           browse-url-new-window-flag t)
+;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+;; (global-set-key "\C-xm" 'browse-url-at-point)
+
+;; (defun desktop-buffer-w3m-misc-data ()
+;;   "Save data necessary to restore a `w3m' buffer."
+;;   (when (eq major-mode 'w3m-mode)
+;;     w3m-current-url))
+
+;; (defun desktop-buffer-w3m ()
+;;   "Restore a `w3m' buffer on `desktop' load."
+;;   (when (eq 'w3m-mode desktop-buffer-major-mode)
+;;     (let ((url desktop-buffer-misc))
+;;       (when url
+;;         (require 'w3m)
+;;         (if (string-match "^file" url)
+;;             (w3m-find-file (substring url 7))
+;;           (w3m-goto-url url))
+;;         (current-buffer)))))
+
+;; ;(add-to-list 'desktop-buffer-handlers 'desktop-buffer-w3m)
+;; ;(add-to-list 'desktop-buffer-misc-functions 'desktop-buffer-w3m-misc-data)
+;; ;(add-to-list 'desktop-buffer-modes-to-save 'w3m-mode)
+>>>>>>> a57913211e7350e0a186d9e5923d7dcb79e2d2c6
 
 (require 'url)
 

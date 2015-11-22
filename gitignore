@@ -24,3 +24,7 @@ identity
 known_hosts
 history
 netrc
+w3m/history
+ssh/id_rsa
+ssh/known_hosts
+ssh/unix_id_rsa.pub
