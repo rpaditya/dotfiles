@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+# rename: renames files according to the expr given on the command line.
+# The expr will usually be a 's' or 'y' command, but can be any valid
+# perl command if it makes sense. Takes a list of files to work on or
+# defaults to '*' in the current directory.
+#
+# from http://www.ugu.com/sui/ugu/show?I=tip.2026
+#
+# e.g.
+#       rename 's/\.flip$/.flop/'       # rename *.flip to *.flop
+#       rename s/flip/flop/             # rename *flip* to *flop*
+#       rename 's/^s\.(.*)/$1.X/'       # switch sccs filenames around
+#       rename 's/$/.orig/' */*.[ch]    # add .orig to your source files in */
+#       rename 'y/A-Z/a-z/'             # lowercase all filenames in .
+#       rename 'y/A-Z/a-z/ if -B'       # same, but just binaries!
+#       rename chop *~                  # restore all ~ backup files
+
+use Getopt::Std;
+my ($subst, $name);
+
+if (!&getopts("nfq") || $#ARGV == -1) {
+    die "Usage: rename [-fnq] <perl expression> [file file...]
+-f   : Force the new filename even if it exists already
+-n   : Just print what would happen, but don't do the command
+-q   : Don't print the files as they are renamed
+e.g. : rename  's/\.c/.c.old/' *
+       rename -q 'y/A-Z/a-z/' *\n";
+}
+
+$subst = shift;                 # Get perl command to work on
+@ARGV = <*> if $#ARGV < 0;      # Default to complete directory
+
+foreach $name (@ARGV) {
+    $_ = $name;
+    eval "$subst;";
+    die $@ if $@;
+    next if -e $_ && !$opt_f;   # Skip if the file exists if asked to.
+    mext if $_ eq $name;
+    if ($opt_n) {
+        print "mv $name $_\n";
+        next;
+    }
+    print "mv $name $_\n" if !$opt_q;
+    rename($name,$_) or warn "Can't rename $name to $_, $!\n";
+}
