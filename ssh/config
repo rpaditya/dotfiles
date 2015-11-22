@@ -1,3 +1,23 @@
+# https://microsoft.sharepoint.com/teams/GNSAutomationProcess/GNS%20Automation%20Wiki/FAQ%20for%20gnsunix%20migration.aspx
+
+#co1gnsunix01.phx.gbl
+
+Host=unix
+ Hostname=co1gnsunix02.phx.gbl
+
+Host=unix1
+ Hostname=co1gnsunix01.phx.gbl
+
+#db5gnsunix01.phx.gbl
+#db5gnsunix02.phx.gbl
+#sg2gnsunix01.phx.gbl
+#sg2gnsunix02.phx.gbl
+
+Host=netmenu
+ Hostname=co1netmenu01.phx.gbl
+
+
+
 Host=src.grot.org
  Hostname=some.lan.grot.org
  Port=2022
@@ -38,16 +58,21 @@ Host=some.lan
  Port=2022
  AddressFamily=inet
 
-Host=some.ipv6
- Hostname=2001:470:c17d:1::111
+Host=some.ipv4
+ Hostname=67.171.12.245
  Port=2022
  user=aditya
- AddressFamily=inet6
 
-Host=unix
+Host=some.ipv6
+ Hostname=2601:8:9500:ba6::48
+ Port=2022
+ user=aditya
+#Hostname=2001:470:c17d:1::111
+# AddressFamily=inet6
+# RemoteForward 6667 localhost:6667
+
+Host=oldunix
  Hostname=10.20.7.93
- User=raditya
- Port=22
 
 Host=pip
  Hostname=10.130.48.13
@@ -89,3 +114,12 @@ Host=gw.lan
  Port=2022
  User=admin
 
+Host=dri
+ Hostname=gns-raditya-a3
+ Port=2022
+ User=raditya
+
+Host=udri
+ Hostname=gns-raditya-a3
+ Port=2024
+ User=raditya

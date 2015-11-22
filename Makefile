@@ -24,3 +24,6 @@ ping:
 
 reboot-required:
 	uname -r; freebsd-version -k
+
+apt:
+	apt-cyg -m http://mirrors.163.com/cygwin/ update
