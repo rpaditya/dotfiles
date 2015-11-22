@@ -55,36 +55,37 @@
 ; '(( "no.?reply\\|DAEMON\\|daemon\\|facebookmail\\|twitter"))
 )
 
-(autoload 'sc-cite-original "supercite")
-(bbdb-insinuate-sc)
-;
+(if user-mail-address "aditya@grot.org"
+    ((autoload 'sc-cite-original "supercite")
+     (bbdb-insinuate-sc)
+; comment out the next two lines if you want to
 ; use the outlook format quoting as defined below rather than supercite
-;
-;(add-hook 'mail-citation-hook 'sc-cite-original)
-;(setq message-cite-function 'sc-cite-original)
+     (add-hook 'mail-citation-hook 'sc-cite-original)
+     (setq message-cite-function 'sc-cite-original)
+     (setq message-citation-line-format
+      "-----------------------
+On %a, %b %d %Y, %N wrote:
+")
+))
 
+(if user-mail-address "raditya@microsoft.com"
+;;; outlook style reply block ;;;
+;; from http://permalink.gmane.org/gmane.emacs.gnus.general/68510
+    ((setq message-citation-line-function 'message-insert-formatted-citation-line)
+     (setq message-cite-reply-above t)
+     (setq message-yank-prefix ""
+	   message-yank-cited-prefix ""
+	   message-yank-empty-prefix "")
 
-; from http://permalink.gmane.org/gmane.emacs.gnus.general/68510
-(setq message-citation-line-function 'message-insert-formatted-citation-line)
-(setq message-cite-reply-above t)
-(setq message-yank-prefix ""
-      message-yank-cited-prefix ""
-      message-yank-empty-prefix "")
-
-;; (setq message-citation-line-format
-;;       "-----------------------
-;; On %a, %b %d %Y, %N wrote:
-;; ")
-
-;; If you even want it more Outlook-ish:
-(setq message-citation-line-format
+     ;; If you even want it more Outlook-ish use this:
+     (setq message-citation-line-format
       "\
 -----Original Message-----
 From: %f
 Sent: %A, %B %d, %Y %H:%M %Z
 ")
-
-
+;;; outlook-style reply block ;;;
+))
 
 ;;sMTP
 (setq smtpmail-smtp-server "localhost")
