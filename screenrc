@@ -1,4 +1,4 @@
-escape ^Tt
+escape ^Oo
 startup_message off
 zombie on
 defflow off # will force iScreen to process ^S/^Q
@@ -66,4 +66,6 @@ screen -t zero 0
 screen -t one 1
 screen -t two 2
 screen -t emacs 3
-screen -t twitter 18 sirc -R -n rpaditya -s im.bitlbee.org
+screen -t four 4
+
+# screen -t twitter 18 sirc -R -n rpaditya -s im.bitlbee.org
