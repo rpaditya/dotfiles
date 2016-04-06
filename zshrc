@@ -39,7 +39,12 @@ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 CLASSPATH=.
 CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/rt.jar
+CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/ext/sqljdbc42.jar
+#CLASSPATH=$CLASSPATH:/usr/share/java/libreadline-java.jar
+#CLASSPATH=$CLASSPATH:/usr/share/java/libreadline-java-0.8.0.1.jar
 CLASSPATH=$CLASSPATH:/usr/share/java
+CLASSPATH=$CLASSPATH:$HOME/lib/java
+#CLASSPATH=$CLASSPATH:$HOME/lib/henplus
 #CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/ext/pg74.213.jdbc3.jar
 #CLASSPATH=$CLASSPATH:/usr/local/src/java/libreadline-java-0.8.0/libreadline-java.jar
 #CLASSPATH=$CLASSPATH:$HOME/lib/henplus/henplus.jar
@@ -113,3 +118,8 @@ fi
 zstyle -s ':completion:*:hosts' hosts _ssh_config
 [[ -r ~/.ssh/config ]] && _ssh_config+=($(cat ~/.ssh/config | sed -ne 's/Host[=\t ]//p'))
 zstyle ':completion:*:hosts' hosts $_ssh_config
+
+if [[ -r /usr/local/bin/azure ]]
+then
+ . <(/usr/local/bin/azure --completion)
+fi
