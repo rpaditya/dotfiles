@@ -13,6 +13,11 @@
 ;; Are we running XEmacs or Emacs?
 (defvar running-xemacs (string-match "XEmacs\\|Lucid" emacs-version))
 
+;;don't use backslash for line wrap indicators as it breaks copying urls
+;; https://www.emacswiki.org/emacs/LineWrap - "Line Wrap character"
+;;
+(set-display-table-slot standard-display-table 'wrap ?\ )
+
 
 ;; Reverse screen's reverse of C-h
 ;(keyboard-translate ?\C-h ?\C-?)
@@ -29,6 +34,11 @@
 (global-set-key [(control h)] 'delete-backward-char)
 
 (global-set-key "\eg" 'goto-line)
+
+(if (window-system)
+    (global-set-key "\C-cy" '(lambda ()
+			       (interactive)
+			       (popup-menu 'yank-menu))))
 
 ;; Turn on font-lock mode for Emacs
 (cond ((not running-xemacs)
