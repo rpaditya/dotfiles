@@ -4,11 +4,19 @@
 watchfor = /ERROR/
     echo=blue
 
+#mail.info
+watchfor = /reject/i
+    echo=red
+
+watchfor = /bounce/i
+    echo=blue
+
 ignore = /local0.debug/
 watchfor = /local0/
     echo=black
 
 ignore = /\w+\.info/
+
 watchfor = /.*/
 	echo=black
 
