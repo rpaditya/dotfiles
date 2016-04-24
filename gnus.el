@@ -393,34 +393,34 @@ is precedense 'junk' or 'bulk' This code is from Ronan Waide < waider
 
 ;; ;(autoload 'wl "wl" "Wanderlust" t)
 
-;; (require 'w3m)
-;; (require 'w3m-load)
-;; ; from http://www.emacswiki.org/emacs/WThreeMHintsAndTips
-;; (setq w3m-use-cookies t)
-;; (setq browse-url-browser-function 'w3m-browse-url
-;;           browse-url-new-window-flag t)
-;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-;; (global-set-key "\C-xm" 'browse-url-at-point)
+(require 'w3m)
+;(require 'w3m-load)
+; from http://www.emacswiki.org/emacs/WThreeMHintsAndTips
+(setq w3m-use-cookies t)
+(setq browse-url-browser-function 'w3m-browse-url
+          browse-url-new-window-flag t)
+(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+(global-set-key "\C-xm" 'browse-url-at-point)
 
-;; (defun desktop-buffer-w3m-misc-data ()
-;;   "Save data necessary to restore a `w3m' buffer."
-;;   (when (eq major-mode 'w3m-mode)
-;;     w3m-current-url))
+(defun desktop-buffer-w3m-misc-data ()
+  "Save data necessary to restore a `w3m' buffer."
+  (when (eq major-mode 'w3m-mode)
+    w3m-current-url))
 
-;; (defun desktop-buffer-w3m ()
-;;   "Restore a `w3m' buffer on `desktop' load."
-;;   (when (eq 'w3m-mode desktop-buffer-major-mode)
-;;     (let ((url desktop-buffer-misc))
-;;       (when url
-;;         (require 'w3m)
-;;         (if (string-match "^file" url)
-;;             (w3m-find-file (substring url 7))
-;;           (w3m-goto-url url))
-;;         (current-buffer)))))
+(defun desktop-buffer-w3m ()
+ "Restore a `w3m' buffer on `desktop' load."
+  (when (eq 'w3m-mode desktop-buffer-major-mode)
+    (let ((url desktop-buffer-misc))
+      (when url
+        (require 'w3m)
+        (if (string-match "^file" url)
+	    (w3m-find-file (substring url 7))
+	  (w3m-goto-url url))
+	(current-buffer)))))
 
-;; ;(add-to-list 'desktop-buffer-handlers 'desktop-buffer-w3m)
-;; ;(add-to-list 'desktop-buffer-misc-functions 'desktop-buffer-w3m-misc-data)
-;; ;(add-to-list 'desktop-buffer-modes-to-save 'w3m-mode)
+;(add-to-list 'desktop-buffer-handlers 'desktop-buffer-w3m)
+;(add-to-list 'desktop-buffer-misc-functions 'desktop-buffer-w3m-misc-data)
+;(add-to-list 'desktop-buffer-modes-to-save 'w3m-mode)
 
 (require 'url)
 
@@ -510,20 +510,21 @@ is precedense 'junk' or 'bulk' This code is from Ronan Waide < waider
 ;(set-face-foreground 'gnus-server-offline "black")
 ;(set-face-foreground 'gnus-server-opened "black")
 
-(set-face-foreground 'gnus-header-content "red")
-(set-face-foreground 'gnus-header-subject "red")
-(set-face-foreground 'gnus-header-from "red")
-(set-face-foreground 'gnus-header-name "red")
-(set-face-foreground 'gnus-header-newsgroups "red")
+(set-face-foreground 'gnus-header-content "navy")
+(set-face-foreground 'gnus-header-subject "black")
+(set-face-foreground 'gnus-header-from "navy")
+(set-face-foreground 'gnus-header-name "navy")
+(set-face-foreground 'gnus-header-newsgroups "navy")
 
-(set-face-foreground 'message-header-cc "red")
-(set-face-foreground 'message-header-name "red")
-(set-face-foreground 'message-header-newsgroups "red")
-(set-face-foreground 'message-header-subject "red")
-(set-face-foreground 'message-header-to "red")
-(set-face-foreground 'message-header-xheader "red")
-(set-face-foreground 'message-header-other "red")
+;; message mode
+
+(set-face-foreground 'message-header-cc "navy")
+(set-face-foreground 'message-header-name "navy")
+(set-face-foreground 'message-header-newsgroups "navy")
+(set-face-foreground 'message-header-subject "black")
+(set-face-foreground 'message-header-to "black")
+(set-face-foreground 'message-header-xheader "navy")
+(set-face-foreground 'message-header-other "nvay")
 (set-face-foreground 'message-cited-text "navy")
 (set-face-foreground 'message-separator "blue")
-
 
