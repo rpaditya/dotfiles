@@ -1,4 +1,4 @@
-;; Red Hat Linux default .emacs initialization file
+;; -*- mode: lisp -*- 
 
 ;; Are we running XEmacs or Emacs?
 (defvar running-xemacs (string-match "XEmacs\\|Lucid" emacs-version))
@@ -10,6 +10,11 @@
 (global-set-key [kp-delete] 'delete-char)
 
 (global-set-key "\eg" 'goto-line)
+
+(if (window-system)
+    (global-set-key "\C-cy" '(lambda ()
+			       (interactive)
+			       (popup-menu 'yank-menu))))
 
 ;; Turn on font-lock mode for Emacs
 (cond ((not running-xemacs)
