@@ -27,3 +27,15 @@ reboot-required:
 
 apt:
 	apt-cyg -m http://mirrors.163.com/cygwin/ update
+
+#
+# count how many times in the last day a station has connected to our wlan
+#
+wlancount:
+	bzgrep " connected" /var/log/messages | sed -e "s/.*gw.lan.grot.org //g" | sed -e "s/ wlan.*//g" | sort | uniq -c
+
+#OUIDB="https://bugzilla.redhat.com/attachment.cgi?id=126669"
+OUIDB="https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf"
+FETCH=fetch -q -o
+ethercodes:
+	@${FETCH} ${HOME}/etc/ethercodes.dat ${OUIDB}
