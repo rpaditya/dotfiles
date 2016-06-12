@@ -3,7 +3,9 @@
 #co1gnsunix01.phx.gbl
 
 Host=unix
- Hostname=co1gnsunix02.phx.gbl
+ Hostname=10.20.8.5
+
+# Hostname=co1gnsunix02.phx.gbl
 
 Host=unix1
  Hostname=co1gnsunix01.phx.gbl
@@ -64,7 +66,7 @@ Host=some.ipv4
  user=aditya
 
 Host=some.ipv6
- Hostname=2601:8:9500:ba6::48
+ Hostname=2001:470:ea93:1::48 
  Port=2022
  user=aditya
 #Hostname=2001:470:c17d:1::111
