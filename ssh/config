@@ -10,8 +10,14 @@ Host=unix
 Host=unix1
  Hostname=co1gnsunix01.phx.gbl
 
-#db5gnsunix01.phx.gbl
-#db5gnsunix02.phx.gbl
+#db3gnsunix01.phx.gbl
+Host=unix2
+ Hostname=10.20.24.101
+
+Host=unix2.ipv6
+ Hostname=2001:506:28:205::10
+
+#db3gnsunix02.phx.gbl
 #sg2gnsunix01.phx.gbl
 #sg2gnsunix02.phx.gbl
 
