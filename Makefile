@@ -39,3 +39,12 @@ OUIDB="https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=m
 FETCH=fetch -q -o
 ethercodes:
 	@${FETCH} ${HOME}/etc/ethercodes.dat ${OUIDB}
+
+WIFIIF:=`netsh interface ipv6 show interface | grep Wi-Fi | /usr/bin/awk '{print $1}'`
+mtu:
+	netsh interface ipv6 show interface
+	@echo "run as admin in cmd shell"
+	@echo ${WIFIIF}
+	netsh interface ipv6 set subinterface 14 mtu=1476 store=persistent
+
+#netsh interface ipv6 set subinterface ${WIFIIF} mtu=1476 store=persistent
