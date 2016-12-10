@@ -20,7 +20,7 @@ twitter:
 #	/usr/bin/fetch -4 --no-verify-peer -o - "https://grot.org/net/my_ip.cgi"
 #	/usr/bin/fetch -q -4 --no-verify-peer -o - "http://pnw-grot.cloudapp.net/ping"
 ping:
-	-@/usr/bin/fetch -T 10 -q -4 --no-verify-peer -o /dev/null "http://s.grot.org/ping" "http://pnw-grot.cloudapp.net/ping" 2>1 /dev/null
+	-@/usr/bin/fetch -T 10 -q -4 --no-verify-peer -o /dev/null "http://s.grot.org/ping?h=some.grot.org" "http://pnw-grot.cloudapp.net/ping?h=some.grot.org" 2>1 /dev/null
 
 reboot-required:
 	uname -r; freebsd-version -k
