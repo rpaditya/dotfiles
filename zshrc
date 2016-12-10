@@ -119,7 +119,12 @@ zstyle -s ':completion:*:hosts' hosts _ssh_config
 [[ -r ~/.ssh/config ]] && _ssh_config+=($(cat ~/.ssh/config | sed -ne 's/Host[=\t ]//p'))
 zstyle ':completion:*:hosts' hosts $_ssh_config
 
-if [[ -r /usr/local/bin/azure ]]
+if [[ $OS =~ ^Windows ]] 
+then
+	alias -r ifconfig='ipconfig;netsh interface ipv4 show subinterfaces;netsh interface ipv6 show subinterfaces'
+fi
+
+	if [[ -r /usr/local/bin/azure ]]
 then
  . <(/usr/local/bin/azure --completion)
 fi

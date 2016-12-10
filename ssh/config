@@ -1,15 +1,24 @@
 # https://microsoft.sharepoint.com/teams/GNSAutomationProcess/GNS%20Automation%20Wiki/FAQ%20for%20gnsunix%20migration.aspx
 
-#co1gnsunix01.phx.gbl
-
+#co1gnsunix02.phx.gbl
 Host=unix
- Hostname=co1gnsunix02.phx.gbl
+ Hostname=10.20.30.93
 
+Host=unix.ipv6
+ Hostname=2001:506:28:15:215:5dff:feef:7801
+
+# Hostname=co1gnsunix01.phx.gbl
 Host=unix1
  Hostname=co1gnsunix01.phx.gbl
 
-#db5gnsunix01.phx.gbl
-#db5gnsunix02.phx.gbl
+#db3gnsunix01.phx.gbl
+Host=unix2
+ Hostname=10.20.24.101
+
+Host=unix2.ipv6
+ Hostname=2001:506:28:205::10
+
+#db3gnsunix02.phx.gbl
 #sg2gnsunix01.phx.gbl
 #sg2gnsunix02.phx.gbl
 
@@ -64,7 +73,7 @@ Host=some.ipv4
  user=aditya
 
 Host=some.ipv6
- Hostname=2601:8:9500:ba6::48
+ Hostname=2001:470:ea93:1::48 
  Port=2022
  user=aditya
 #Hostname=2001:470:c17d:1::111
