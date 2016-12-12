@@ -175,6 +175,9 @@ Sent: %A, %B %d, %Y %H:%M %Z
 	("grot.Starred"
          (display . all)
          (expiry-target . never))
+	("grot.updates"
+         (display . all)
+         (expiry-target . never))
         ("nntp news.gmane.org"
          (posting-style
           (name "R.P. (Adi) Aditya")
@@ -189,6 +192,7 @@ Sent: %A, %B %d, %Y %H:%M %Z
 (setq gnus-total-expirable-newsgroups
           (regexp-opt '("bulk"
 			"Spam"
+			"grot.bulk"
 			"auto")))
 
 (defun my-message-mode-setup ()

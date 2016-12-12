@@ -13,7 +13,7 @@ monitor() {
 
   while ps $pid &>/dev/null; do
     if (( i++ > 35 )); then
-      logger -p crit "Max checks reached. Sending SIGKILL to ${pid}..."
+      logger -p crit "${USER} Max checks reached. Sending SIGKILL to ${pid}..."
 #      echo "Max checks reached. Sending SIGKILL to ${pid}..." >&2
       kill -9 $pid; return 1
     fi
@@ -34,7 +34,7 @@ if ps $pid &>/dev/null; then
 fi
 
 logger -p info "Starting offlineimap"
-out=`offlineimap -o -u quiet & monitor $!`
+out=`offlineimap -o -q -u quiet & monitor $!`
 logger -p info "${out}"
 #if [ $? -ne 0 ]; then
 #    cleanup
