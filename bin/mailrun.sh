@@ -1,5 +1,6 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
+#exec 1> >(logger -p error -t $(basename $0)) 2>&1
 
 cleanup() {
     /usr/bin/sqlite3 ~/.offlineimap/Account-mswork/LocalStatus-sqlite/INBOX 'pragma integrity_check;'
@@ -12,8 +13,8 @@ monitor() {
   local pid=$1 i=0
 
   while ps $pid &>/dev/null; do
-    if (( i++ > 35 )); then
-      logger -p crit "${USER} Max checks reached. Sending SIGKILL to ${pid}..."
+    if (( i++ > 12 )); then
+      logger -p crit "$USER mailrun Max checks reached. Sending SIGKILL to ${pid}..."
 #      echo "Max checks reached. Sending SIGKILL to ${pid}..." >&2
       kill -9 $pid; return 1
     fi
@@ -28,16 +29,31 @@ monitor() {
 read -r pid < ~/.offlineimap/pid
 
 if ps $pid &>/dev/null; then
-  logger -p crit "Process ${pid} already running. Exiting..."
+  logger -p crit "$USER mailrun Process ${pid} already running. Exiting..."
 #  echo "Process $pid already running. Exiting..." >&2
   exit 1
 fi
 
-logger -p info "Starting offlineimap"
-out=`offlineimap -o -q -u quiet & monitor $!`
-logger -p info "${out}"
-#if [ $? -ne 0 ]; then
-#    cleanup
-#fi
-logger -p info "end of mailrun.sh/offlineimap script"
+repo=mswork
+verbosity=quiet
 
+if [ $USER -eq 'aditya' ] ; then
+    repo=gmail-grot
+fi
+
+#every 5 minutes get the full repository, otherwise only the INBOX and moc
+if [ $(( 10#$(date +%M) % 6)) -eq 0 ] ; then
+    folders=""
+else
+    if [ $repo -eq 'mswork' ] ; then
+	folders="-f INBOX,moc"
+    else
+	folders="-f INBOX"
+    fi
+fi
+
+logger -p info -t ${USER}-imap "[${$}] start ${repo} ${folders}"
+
+`offlineimap -o -u ${verbosity} -q -a ${repo} ${folders}| sed -e 's/\; skipping it. Please see FAQ and manual on how to handle this.//g' | sed -e 's/\;//g' | logger -t raditya-imap -p error` & monitor $!
+
+logger -p info -t ${USER}-imap "[${$}] end"
