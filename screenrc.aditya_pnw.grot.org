@@ -18,11 +18,15 @@ termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce "on"
 
 # 256 colors in emacs http://emacswiki.org/emacs/GnuScreen#toc6
-#term screen-256color
+term screen-256color
 #
 # screen-256color is unsupported on too many platforms
 #
-term screen
+#term screen
+#
+# xterm-256color seems to work pretty much everywhere!
+#
+#term xterm-256color
 
 setenv SSH_AUTH_SOCK $HOME/.ssh-agent-screen.groups
 setenv LC_ALL en_US.UTF-8
@@ -68,20 +72,20 @@ termcapinfo xterm* ti@:te@
 screen -t zero 0 ssh tiny
 screen -t one 1
 screen -t mutt 2 ssh tiny
-screen -t emacs 3 ssh rpaditya@localhost
-screen -t four 4 ssh rpaditya@localhost
+screen -t emacs 3 
+screen -t four 4 ssh 8605redmond.ssh
 screen -t five 5 ssh rpaditya@localhost
 screen -t six 6 ssh rpaditya@localhost
-screen -t some 7 ssh some.ipv4
+screen -t some 7 ssh 8605redmond.ssh
 screen -t swatch 8 swatch
 screen -t check 9 ssh check@localhost
 screen -t psql 10
 screen -t gocoho 11 ssh gocoho
-screen -t mini 12 ssh some.ipv4
-screen -t mu2 13 
-screen -t vps 14 ssh prime
+screen -t mini 12 ssh 8605redmond.ssh
+screen -t mu2 13 ssh rpaditya@localhost
+screen -t vps 14 ssh 8605redmond.ssh
 screen -t onefive 15
-screen -t onesix 16
+screen -t onesix 16 ssh 8605redmond.ssh
 screen -t images 17
 screen -t twitter 18 sirc -Rn rpaditya -s im.bitlbee.org
 screen -t mu5 19
@@ -89,7 +93,7 @@ screen -t mu-swatch 20
 screen -t talk 21 sirc -n aditya -s 127.0.0.1
 screen -t mu4 22
 screen -t chivas 23
-screen -t trove 24 ssh some.ipv4
+screen -t trove 24 ssh 8605redmond.ssh
 
 #split
 #split
