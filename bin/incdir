@@ -1,0 +1,155 @@
+#!/bin/sh
+
+VERSION='$Id: incdir,v 1.5 2002/01/07 23:46:55 aditya Exp aditya $'
+IDIR=.
+MDIR=${HOME}/Maildir
+FROMCUR="NO"
+MOVE="YES"
+PICK=/usr/local/bin/pick
+SCAN=/usr/local/bin/scan
+UNSEEN=unseen
+
+args=`getopt abqd:i: $*`
+if [ $? != 0 ]; then
+    echo "usage: incdir [-b] [-d maildir] [-i inboxdir]"
+    echo "    -a            retrieve all mail from maildir/{cur,new} directory"
+    echo "    -b            backup mail to maildir/cur directory"
+    echo "    -d maildir    path to maildir  (default: ${HOME}/Maildir)"
+    echo "    -i inboxdir   path to inboxdir  (default: .)"
+    echo "    -q quiet      does not echo message numbers"
+    echo
+    echo "version: $VERSION"
+    exit 1
+fi
+set -- $args
+for i
+do
+    case "$i" in
+    -a)
+	FROMCUR="YES"; shift
+	;;
+    -b)
+	MOVE="NO"; shift
+	;;
+    -q)
+        QUIET="YES"; shift
+	;;
+    -d)
+	MDIR="$2"; shift; shift
+	;;
+    -i)
+	IDIR="$2"; shift; shift
+	;;
+    --)
+	shift; break
+	;;
+    esac
+done
+
+if [ \( ! -d $MDIR/new \) -a \( ! -d $MDIR/cur \) ]; then
+    echo "can't find $MDIR."; exit 1
+fi
+if [ ! -d $IDIR ]; then
+    echo "can't find $IDIR."; exit 1
+fi
+
+SEQ=`ls -f1 $IDIR | egrep '^[1-9][0-9]*$' | sort -n | tail -1`
+if [ "$SEQ"X = ""X ]; then
+    SEQ=1
+else
+    SEQ=`expr $SEQ + 1`
+fi
+
+FIRST=$SEQ
+
+if [ "$FROMCUR"X = "YES"X ]; then
+    for f in $MDIR/cur/*; do
+	# sanity check
+	[ ! -f $f ] && continue
+	while [ -f $IDIR/$SEQ ]; do
+	    SEQ=`expr $SEQ + 1`
+	done
+	if [ "$MOVE"X = "YES"X ]; then
+	    mv $f $IDIR/$SEQ
+	else
+	    cp -p $f $IDIR/$SEQ
+	fi
+#	if [ "$QUIET"X != "YES"X ]; then
+#  	    echo $SEQ
+#        fi
+        $PICK -nozero ${SEQ} -seq $UNSEEN +${IDIR} > /dev/null
+	SEQ=`expr $SEQ + 1`
+    done
+fi
+
+for f in $MDIR/new/*; do
+    # sanity check
+    [ ! -f $f ] && continue
+    while [ -f $IDIR/$SEQ ]; do
+	SEQ=`expr $SEQ + 1`
+    done
+
+    if [ "$MOVE"X = "YES"X ]; then
+	mv $f $IDIR/$SEQ
+    else
+	cp -p $f $IDIR/$SEQ
+	mv $f $MDIR/cur/`basename $f`:2,S
+    fi
+#    if [ "$QUIET"X != "YES"X ]; then
+#        echo $SEQ
+#    fi
+    $PICK -nozero ${SEQ} -seq $UNSEEN +${IDIR} > /dev/null
+    SEQ=`expr $SEQ + 1`
+done
+
+if [ "$QUIET"X != "YES"X ]; then
+	if [ $FIRST != $SEQ ]; then
+		${SCAN} +${IDIR} ${FIRST}-${SEQ}
+	fi
+fi
+
+
+exit 0
+
+# incdir - incorporate new mail from qmail user's maildir
+#     author: Yasunari Momoi <momo@bug.org>
+#     created: 2000/10/13
+#
+#
+# Add the following to your emacs configuration file.
+#
+# (setq mew-mailbox-type 'mbox)   ; this applies also maildir
+# (setq mew-mbox-command "incdir")
+# (setq mew-mbox-command-arg "-d /path/to/your/maildir")
+#
+# Suppose the following situation:
+#
+#  	cur:  1,2
+#  	new:  3,4
+#
+# The "-a" and "-b" option work as follows:
+#
+#  (1) "incdir"
+#  	cur:  1,2
+#  	new: 
+#  	home: 3,4
+#
+#  (2) "incdir -a"
+#  	cur: 
+#  	new:
+#  	home: 1,2,3,4
+#
+#  (3) "incdir -b"
+#  	cur:  1,2,3,4
+#  	new: 
+#  	home: 1,2
+#
+#  (4) "incdir -a -b"
+#  	cur:  1,2,3,4
+#  	new: 
+#  	home: 1,2,3,4
+#
+#  Note: "incdir -a -b" retrieves same messages multiple times.
+#
+# Copyright (C) 2000 Yasunari Momoi.  All rights reserved.
+# Copyright notice is the same as Mew's one.
