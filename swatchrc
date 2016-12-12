@@ -1,15 +1,23 @@
 # -*- mode: perl -*- 
 # Personal Swatch configuration file
 #
+watchfor = /grot\.org/
+    echo=bold
+
+ignore = /mail.warning.*does not resolve to address/
+
+watchfor = /UID validity problem for folder (\w+) \(repo (\S+)\)/
+    exec echo "$1" >> /home/rpaditya/tmp/${2}.offlineimap-invalid-uid
+
 watchfor = /ERROR/
-    echo=blue
+    echo=bold
 
 #mail.info
 watchfor = /reject/i
-    echo=red
+    echo=bold
 
 watchfor = /bounce/i
-    echo=blue
+    echo=bold
 
 ignore = /local0.debug/
 watchfor = /local0/
