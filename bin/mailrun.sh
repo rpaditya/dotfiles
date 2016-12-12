@@ -37,7 +37,7 @@ fi
 repo=mswork
 verbosity=quiet
 
-if [ $USER -eq 'aditya' ] ; then
+if [ $USER == 'aditya' ] ; then
     repo=gmail-grot
 fi
 
@@ -45,7 +45,7 @@ fi
 if [ $(( 10#$(date +%M) % 6)) -eq 0 ] ; then
     folders=""
 else
-    if [ $repo -eq 'mswork' ] ; then
+    if [ $repo == 'mswork' ] ; then
 	folders="-f INBOX,moc"
     else
 	folders="-f INBOX"
