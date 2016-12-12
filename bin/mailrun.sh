@@ -54,6 +54,6 @@ fi
 
 logger -p info -t ${USER}-imap "[${$}] start ${repo} ${folders}"
 
-`offlineimap -o -u ${verbosity} -q -a ${repo} ${folders}| sed -e 's/\; skipping it. Please see FAQ and manual on how to handle this.//g' | sed -e 's/\;//g' | logger -t raditya-imap -p error` & monitor $!
+`offlineimap -o -u ${verbosity} -q -a ${repo} ${folders}| sed -e 's/\; skipping it. Please see FAQ and manual on how to handle this.//g' | sed -e 's/\;//g' | logger -t ${USER}-imap -p error` & monitor $!
 
 logger -p info -t ${USER}-imap "[${$}] end"
