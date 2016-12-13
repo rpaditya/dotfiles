@@ -6,8 +6,13 @@ watchfor = /grot\.org/
 
 ignore = /mail.warning.*does not resolve to address/
 
-watchfor = /UID validity problem for folder (\w+) \(repo (\S+)\)/
-    exec echo "$1" >> /home/rpaditya/tmp/${2}.offlineimap-invalid-uid
+#watchfor = /UID validity problem for folder (\w+) \(repo (\S+)\)/
+#    exec echo "$1" >> /home/rpaditya/tmp/${2}.offlineimap-invalid-uid
+
+#    Dec 13 00:31:35 <user.err> some aditya-imap: UID validity problem for folder grot/bulk (repo gmail-grot) (saved 603505188 got 603505189)
+# will run another script out of cron to clean these up periodically
+watchfor = / (\w+)\-imap\: UID validity problem for folder (\S+) \(repo (\S+)\)/
+    exec echo "$2" >> /home/$1/tmp/$3.offlineimap-invalid-uid
 
 watchfor = /ERROR/
     echo=bold
