@@ -12,6 +12,7 @@ my($USER) = $ENV{'USER'};
 
 if (defined $fldrs && $fldrs ne ""){
     my(@folders) = split(',', $fldrs);
+    my($flist) = "\"" . join('","', @folders) . "\"";
 
     for my $f (@folders){
 	chomp $f;
@@ -20,5 +21,5 @@ if (defined $fldrs && $fldrs ne ""){
 	print `rm -fr ~/.offlineimap/Repository-${repo}/FolderValidity/${f}`;
     }
 
-    print `offlineimap -o -u ttyui -a ${repo} -f ${fldrs}`;
+    print `offlineimap -o -u ttyui -a ${repo} -f ${flist}`;
 }
