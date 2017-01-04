@@ -41,13 +41,15 @@ if [ $USER == 'aditya' ] ; then
     repo=gmail-grot
 fi
 
-if [ $1 -ge 0 ] ; then
+# by default we only get the full repo every 6 minutes
+# which if the cron job runs every 3 mins, then it is every other time
+fulleveryxmins=6
+myminarg=$1
+if [ $myminarg ] ; then
     fulleveryxmins=$1
-else
-    fulleveryxmins=6
 fi
 
-#every 5 minutes get the full repository, otherwise only the INBOX and moc
+#every fulleveryxmins mins get the full repository, otherwise only the INBOX and moc
 if [ $(( 10#$(date +%M) % ${fulleveryxmins} )) -eq 0 ] ; then
     folders=""
 else
