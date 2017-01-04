@@ -41,8 +41,14 @@ if [ $USER == 'aditya' ] ; then
     repo=gmail-grot
 fi
 
+if [ $1 -ge 0 ] ; then
+    fulleveryxmins=$1
+else
+    fulleveryxmins=6
+fi
+
 #every 5 minutes get the full repository, otherwise only the INBOX and moc
-if [ $(( 10#$(date +%M) % 6)) -eq 0 ] ; then
+if [ $(( 10#$(date +%M) % ${fulleveryxmins} )) -eq 0 ] ; then
     folders=""
 else
     if [ $repo == 'mswork' ] ; then
