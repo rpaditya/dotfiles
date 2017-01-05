@@ -2,6 +2,14 @@
 
 #exec 1> >(logger -p error -t $(basename $0)) 2>&1
 
+# by default we only get the full repo every 6 minutes
+# which if the cron job runs every 3 mins, then it is every other time
+fulleveryxmins=6
+myminarg=$1
+if [ $myminarg ] ; then
+    fulleveryxmins=$1
+fi
+
 cleanup() {
     /usr/bin/sqlite3 ~/.offlineimap/Account-mswork/LocalStatus-sqlite/INBOX 'pragma integrity_check;'
 }
@@ -13,13 +21,15 @@ monitor() {
   local pid=$1 i=0
 
   while ps $pid &>/dev/null; do
-    if (( i++ > 12 )); then
+    # wait for at least as many minutes as we expect a run instead of a fixed amount
+    if (( i++ > ${fulleveryxmins} )); then
       logger -p crit "$USER mailrun Max checks reached. Sending SIGKILL to ${pid}..."
 #      echo "Max checks reached. Sending SIGKILL to ${pid}..." >&2
       kill -9 $pid; return 1
     fi
 
-    sleep 10
+    # wait for up to a minute instead of just 10 seconds now that we get large archives
+    sleep 59
 #    cleanup
   done
 
@@ -39,14 +49,6 @@ verbosity=quiet
 
 if [ $USER == 'aditya' ] ; then
     repo=gmail-grot
-fi
-
-# by default we only get the full repo every 6 minutes
-# which if the cron job runs every 3 mins, then it is every other time
-fulleveryxmins=6
-myminarg=$1
-if [ $myminarg ] ; then
-    fulleveryxmins=$1
 fi
 
 #every fulleveryxmins mins get the full repository, otherwise only the INBOX and moc
