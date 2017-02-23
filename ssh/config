@@ -1,21 +1,35 @@
 # https://microsoft.sharepoint.com/teams/GNSAutomationProcess/GNS%20Automation%20Wiki/FAQ%20for%20gnsunix%20migration.aspx
 
+#nettools1-co1.phx.gbl
+#nettools2-co1.phx.gbl
+#nettools1-ch1.phx.gbl
+#nettools2-ch1.phx.gbl
+#nettools1-sg2.phx.gbl
+#nettools2-sg2.phx.gbl
+Host=unix2
+ Hostname=10.20.5.32
+ #Hostname=nettools2-ch1.phx.gbl
+
+#nettools1-sg2.phx.gbl
+#nettools2-sg2.phx.gbl
+
+
 #co1gnsunix02.phx.gbl
-Host=unix
+Host=oldunix
  Hostname=10.20.30.93
 
-Host=unix.ipv6
+Host=oldunix.ipv6
  Hostname=2001:506:28:15:215:5dff:feef:7801
 
 # Hostname=co1gnsunix01.phx.gbl
-Host=unix1
+Host=oldunix1
  Hostname=co1gnsunix01.phx.gbl
 
 #db3gnsunix01.phx.gbl
-Host=unix2
+Host=oldunix2
  Hostname=10.20.24.101
 
-Host=unix2.ipv6
+Host=oldunix2.ipv6
  Hostname=2001:506:28:205::10
 
 #db3gnsunix02.phx.gbl
@@ -52,6 +66,7 @@ Host=tiny.ipv6
 
 Host=tiny.ipv4
  Hostname=134.215.222.243
+ HostKeyAlgorithms +ssh-dss
  User=aditya
  Port=2022
  AddressFamily=inet
@@ -68,8 +83,8 @@ Host=some.lan
  AddressFamily=inet
 
 Host=some.ipv4
- Hostname=67.171.12.245
- Port=2022
+ Hostname=gw.go.grot.org
+ Port=2024
  user=aditya
 
 Host=some.ipv6
