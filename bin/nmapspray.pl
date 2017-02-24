@@ -21,7 +21,7 @@ my($verbose) = 0;
 GetOptions ("count=i" => \$count,    # numeric
 	    "dip=s"   => \$dest,      # string
 	    "sport=i" => \$startport,
-	    "dport=s" => \$dport,
+	    "dport=i" => \$dport,
 	    "verbose"  => \$verbose)   # flag
     or die("Error in command line arguments\n");
 
@@ -31,19 +31,26 @@ chomp($dport);
 my(@dports) = split(/\,/, $dport);
 
 my(%stats);
-for (my $i=1;$i<=$count;$i++){
+for (my $i=0;$i<$count;$i++){
     my($sport) = $startport + $i;
-    my(@ret) =`sudo nmap -P0 -p ${dport} -g ${sport} -sS ${dest}`;
+    my(@ret) =`sudo nmap -v -P0 -p ${dport} -g ${sport} -sS ${dest}`;
     for my $dp (@dports){
+	my($latency) = 0;
 	for my $l (@ret){
 	    chomp $l;
-	    next unless ($l =~ /^${dp}/);
+	    if ($l =~ /Host is up \(((\d|\.)+)s latency\)\./){
+		$latency = $1;
+	    }
+	    
+	    if (! $verbose){
+		next unless ($l =~ /^${dp}/);
+	    }
 	    $l =~ /${dp}\/tcp\s+(\w+)\s+/;
 	    $stats{$dp}{$1}++;
 	    if (! defined $1 && $verbose){
 		print "DEBUG:" . $l . "\n";
 	    }
-	    print $i . ":" . $sport . ": " . $l . "\n";
+	    print $i . ":" . $sport . ": (${latency}s) " . $l . "\n";
 	}
     }
 }
