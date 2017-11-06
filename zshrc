@@ -68,7 +68,8 @@ export COLORFGBG="default;default"
 # glog    gsub -eak aditya@grot.org >>& ~/.glog &
 # gsend   gsend -t message/image=http://www.grot.org/aditya.gif
 #alias -r inc='incdir -a -i ~/Mail/inbox'
-alias -r inc='incdir -a -i /mnt/aditya/tiny.grot.org/Mail/inbox'
+#alias -r inc='incdir -a -i /mnt/aditya/tiny.grot.org/Mail/inbox'
+alias -r inc='incdir -a -i ~/Mail.tiny/inbox -d ~/Maildir'
 # india   setenv TZ Asia/Calcutta; date; setenv TZ UTC
 alias -r india='date -u -v+5H -v+30M'
 # ls      ls-F
