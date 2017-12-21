@@ -1,0 +1,16 @@
+#!/bin/sh
+
+SIRCLIB=/home/aditya/lib/sirc ; export SIRCLIB
+
+if test -z "$SIRCSERVER" && test -z "$IRCSERVER"
+then
+  SIRCSERVER="irc.primenet.com"
+  export SIRCSERVER
+fi
+
+case "$1" in
+  -d) shift
+      exec /usr/bin/perl /home/aditya/lib/sirc/dsirc "$@"
+      ;;
+  *)  eval exec /home/aditya/bin/ssfe $SSFE /usr/bin/perl /home/aditya/lib/sirc/dsirc \"\$@\"
+esac
