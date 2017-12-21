@@ -7,7 +7,7 @@ Editor: /home/aditya/.mutt/editor.sh
 Folder-protect: 0700
 Msg-protect: 0600
 #Path: Mail
-Path: /mnt/aditya/tiny.grot.org/Mail
+Path: /home/aditya/Mail.tiny
 #Signature: <aditya@dnai.com>
 #Signature: "Ramaswamy P. Aditya" <aditya@dnai.com>
 ali: -list
