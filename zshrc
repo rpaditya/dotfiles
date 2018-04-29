@@ -22,7 +22,7 @@ path=($path /usr/bin/mh ~/bin)
 #export PACKAGESITE=ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/i386/packages-5-stable/Latest/
 export PACKAGESITE=ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/i386/packages-stable/Latest/
 
-export TZ=America/Detroit
+export TZ=UTC
 
 export SCREENDIR="${HOME}/.screen"
 export SSH_AUTH_SOCK="${HOME}/.ssh-agent-screen.groups"
@@ -128,4 +128,9 @@ fi
 	if [[ -r /usr/local/bin/azure ]]
 then
  . <(/usr/local/bin/azure --completion)
+fi
+
+if [[ -r ${HOME}/.zshrc.local ]]
+then
+ . ${HOME}/.zshrc.local
 fi
