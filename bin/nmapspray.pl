@@ -33,7 +33,12 @@ my(@dports) = split(/\,/, $dport);
 my(%stats);
 for (my $i=0;$i<$count;$i++){
     my($sport) = $startport + $i;
-    my(@ret) =`sudo nmap -v -P0 -p ${dport} -g ${sport} -sS ${dest}`;
+    my($cmd) = "nmap -v -Pn -p ${dport} -g ${sport} -sS ${dest}";
+    if ($> == 0){
+    } else {
+	$cmd = "sudo " . $cmd;
+    }
+    my(@ret) = `${cmd}`;
     for my $dp (@dports){
 	my($latency) = 0;
 	for my $l (@ret){
@@ -47,6 +52,9 @@ for (my $i=0;$i<$count;$i++){
 	    }
 	    $l =~ /${dp}\/tcp\s+(\w+)\s+/;
 	    $stats{$dp}{$1}++;
+	    if ($l =~ "filtered"){
+		$stats{$l}{$i}++;
+	    }
 	    if (! defined $1 && $verbose){
 		print "DEBUG:" . $l . "\n";
 	    }
