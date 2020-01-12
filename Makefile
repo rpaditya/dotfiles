@@ -48,3 +48,21 @@ mtu:
 	netsh interface ipv6 set subinterface 14 mtu=1476 store=persistent
 
 #netsh interface ipv6 set subinterface ${WIFIIF} mtu=1476 store=persistent
+
+external-screen-only:
+	#xrandr --output DP-1 --scale 1.5x1.5 --fb 8192x8192
+	#xrandr --output DP-1 --scale 2x2 --fb 5120x2160 --panning 5120x2160
+	xrandr --dpi 276 \
+	--output eDP-1 --off \
+	--output DP-1 --scale 1.5x1.5 --fb 3840x1620 --panning 3840x1620
+
+dual-screen:
+	xrandr --dpi 276 \
+	--output eDP-1 --mode 1920x1080 \
+	--output DP-1 --scale 1.5x1.5 --fb 3840x1620 --panning 3840x1620
+
+screen-reset:
+	xrandr --output eDP-1 --scale 1x1 --fb 1920x1080 --panning 1920x1080
+
+turn-off-touchpad-on-external-mouse:
+	gsettings set org.gnome.desktop.peripherals.touchpad send-events disabled-on-external-mouse
