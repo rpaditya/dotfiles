@@ -48,3 +48,16 @@ mtu:
 	netsh interface ipv6 set subinterface 14 mtu=1476 store=persistent
 
 #netsh interface ipv6 set subinterface ${WIFIIF} mtu=1476 store=persistent
+
+#SRCLOG=/var/log/messages.0.bz2
+SRCLOG=/var/log/messages
+RAWDST=${HOME}/tmp/gw-login-failure_blocklist.txt
+UNIQDST=${HOME}/tmp/gw-login-failure_blocklist.txt.1
+CMDDST=${HOME}/tmp/attackers.now
+LOCALGOLDBLOCK=192.168.88.
+GOLDIP=`host pnw-grot.cloudapp.net | sed -E "s/pnw-grot.cloudapp.net has address (.*)/\1/g"`
+attackers:
+	bzgrep "login failure for user" ${SRCLOG} | sed -E 's/.* from (.*) via ssh/\1/g' | egrep -v "(${LOCALGOLDBLOCK}|${GOLDIP})" > ${RAWDST}
+	sort -un ${RAWDST} > ${UNIQDST}
+	cat ${UNIQDST} | xargs -IBADIP -n1 echo "ip firewall address-list add list=attackers address=BADIP" > ${CMDDST}
+	cat ${CMDDST}
