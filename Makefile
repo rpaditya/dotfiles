@@ -66,3 +66,9 @@ screen-reset:
 
 turn-off-touchpad-on-external-mouse:
 	gsettings set org.gnome.desktop.peripherals.touchpad send-events disabled-on-external-mouse
+
+backup: backup-pictures
+
+HOST=`hostname`
+backup-pictures:
+	rsync -av ~/Pictures some.ipv6:images.grot.org/up/${HOST}/
